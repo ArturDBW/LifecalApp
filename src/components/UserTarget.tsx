@@ -1,9 +1,4 @@
 import { useState } from "react";
-
-type SecondBoxProps = {
-  changePage: number;
-};
-
 import {
   Box,
   Button,
@@ -11,7 +6,25 @@ import {
   ToggleButtonGroup,
   Typography,
 } from "@mui/material";
-export const SecondBox = ({ changePage }: SecondBoxProps) => {
+import styled from "styled-components";
+
+type UserTargetProps = {
+  changePage: number;
+};
+
+const ContainerBox = styled(Box)`
+  padding: 20px;
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.2s ease;
+  position: absolute;
+  top: 0;
+  left: 0;
+`;
+
+export const UserTarget = ({ changePage }: UserTargetProps) => {
   const [view, setView] = useState<string>("");
 
   const handleChange = (_: React.ChangeEvent<{}>, newValue: string) => {
@@ -19,34 +32,23 @@ export const SecondBox = ({ changePage }: SecondBoxProps) => {
   };
 
   return (
-    <Box
+    <ContainerBox
       sx={{
-        padding: "20px",
-        height: "60vh",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
         transform: `translateX(${100 - changePage}%)`,
-        transition: "transform 0.2s ease",
-        position: "absolute",
-        top: "0",
-        left: "0",
       }}
     >
       <Box>
         <Typography
           variant="h5"
-          sx={{
-            textAlign: "center",
-            marginBottom: "40px",
-            fontWeight: "bold",
-          }}
+          textAlign="center"
+          fontWeight="bold"
+          marginBottom="28px"
         >
           What goal do you have in mind?
         </Typography>
         <ToggleButtonGroup
           orientation="vertical"
-          sx={{ width: "100%" }}
+          fullWidth
           value={view}
           exclusive
           onChange={handleChange}
@@ -63,28 +65,19 @@ export const SecondBox = ({ changePage }: SecondBoxProps) => {
         </ToggleButtonGroup>
       </Box>
       <Box>
-        <Typography variant="body2" align="center">
+        <Typography variant="body2" align="center" marginBottom="28px">
           Your sex impacts your metabolic rate, so we use this information to
           calculate your daily recommendations.
         </Typography>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            marginTop: "20px",
-            alignItems: "start",
-          }}
+        <Button
+          disabled={true && view === ""}
+          variant="contained"
+          size="large"
+          fullWidth
         >
-          <Button
-            disabled={true && view === ""}
-            variant="contained"
-            size="large"
-            fullWidth
-          >
-            NEXT
-          </Button>
-        </Box>
+          NEXT
+        </Button>
       </Box>
-    </Box>
+    </ContainerBox>
   );
 };

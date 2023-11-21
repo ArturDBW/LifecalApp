@@ -1,37 +1,39 @@
-type FourthBoxProps = {
+import { Box, Button, TextField, Typography } from "@mui/material";
+import { useState } from "react";
+import styled from "styled-components";
+
+type UserBodyProps = {
   changePage: number;
 };
 
-import { Box, Button, TextField, Typography } from "@mui/material";
-import { useState } from "react";
-export const FourthBox = ({ changePage }: FourthBoxProps) => {
+const ContainerBox = styled(Box)`
+  padding: 20px;
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.2s ease;
+  position: absolute;
+  top: 0;
+  left: 0;
+`;
+export const UserBody = ({ changePage }: UserBodyProps) => {
   const [age, setAge] = useState<number | undefined>();
   const [weight, setWeight] = useState<number | undefined>();
   const [height, setHeight] = useState<number | undefined>();
 
   return (
-    <Box
+    <ContainerBox
       sx={{
-        padding: "20px",
-        height: "60vh",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
         transform: `translateX(${300 - changePage}%)`,
-        transition: "transform 0.2s ease",
-        position: "absolute",
-        top: "0",
-        left: "0",
       }}
     >
       <Box>
         <Typography
           variant="h5"
-          sx={{
-            textAlign: "center",
-            marginBottom: "40px",
-            fontWeight: "bold",
-          }}
+          textAlign="center"
+          fontWeight="bold"
+          marginBottom="28px"
         >
           We need information about your age, weight and height.
         </Typography>
@@ -75,23 +77,24 @@ export const FourthBox = ({ changePage }: FourthBoxProps) => {
         />
       </Box>
       <Box>
-        <Typography variant="body2" align="center">
+        <Typography variant="body2" align="center" marginBottom="28px">
           We use this information to calculate and provide you with daily
           personalized recommendations.
         </Typography>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            marginTop: "20px",
-            alignItems: "start",
-          }}
+
+        <Button
+          disabled={
+            (true && age === undefined) ||
+            weight === undefined ||
+            height === undefined
+          }
+          variant="contained"
+          size="large"
+          fullWidth
         >
-          <Button variant="contained" size="large" fullWidth>
-            NEXT
-          </Button>
-        </Box>
+          NEXT
+        </Button>
       </Box>
-    </Box>
+    </ContainerBox>
   );
 };
