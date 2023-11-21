@@ -1,3 +1,5 @@
+import { StarterModal } from "./pages/StarterModal";
+
 export const App = () => {
-  return <div>Hello, World!</div>;
+  return <StarterModal />;
 };
