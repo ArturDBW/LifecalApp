@@ -49,6 +49,10 @@ export const UserBody = ({ changePage }: UserBodyProps) => {
             setAge(isNaN(newValue) ? undefined : newValue);
           }}
           sx={{ marginBottom: "20px" }}
+          error={age !== undefined ? age < 12 || age > 99 : false}
+          helperText={
+            age !== undefined && (age < 12 || age > 99) ? "Invalid age." : ""
+          }
         />
         <TextField
           id="outlined-basic"
@@ -62,6 +66,12 @@ export const UserBody = ({ changePage }: UserBodyProps) => {
             setWeight(isNaN(newValue) ? undefined : newValue);
           }}
           sx={{ marginBottom: "20px" }}
+          error={weight !== undefined ? weight < 35 || weight > 160 : false}
+          helperText={
+            weight !== undefined && (weight < 35 || weight > 160)
+              ? "Invalid weight."
+              : ""
+          }
         />
         <TextField
           id="outlined-basic"
@@ -74,6 +84,12 @@ export const UserBody = ({ changePage }: UserBodyProps) => {
             setHeight(isNaN(newValue) ? undefined : newValue);
           }}
           type="number"
+          error={height !== undefined ? height < 120 || height > 240 : false}
+          helperText={
+            height !== undefined && (height < 120 || height > 240)
+              ? "Invalid height."
+              : ""
+          }
         />
       </Box>
       <Box>
