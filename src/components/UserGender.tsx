@@ -1,9 +1,3 @@
-import { useState } from "react";
-
-type ThirdBoxProps = {
-  changePage: number;
-};
-
 import {
   Box,
   Button,
@@ -11,7 +5,15 @@ import {
   ToggleButtonGroup,
   Typography,
 } from "@mui/material";
-export const ThirdBox = ({ changePage }: ThirdBoxProps) => {
+import { useState } from "react";
+import { ContainerBox } from "../styles/GetBasicInformationStyles";
+
+type UserGenderProps = {
+  changePage: number;
+  setChangePage: React.Dispatch<React.SetStateAction<number>>;
+};
+
+export const UserGender = ({ changePage, setChangePage }: UserGenderProps) => {
   const [view, setView] = useState<string>("");
 
   const handleChange = (_: React.ChangeEvent<{}>, newValue: string) => {
@@ -19,28 +21,17 @@ export const ThirdBox = ({ changePage }: ThirdBoxProps) => {
   };
 
   return (
-    <Box
+    <ContainerBox
       sx={{
-        padding: "20px",
-        height: "60vh",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
         transform: `translateX(${200 - changePage}%)`,
-        transition: "transform 0.2s ease",
-        position: "absolute",
-        top: "0",
-        left: "0",
       }}
     >
       <Box>
         <Typography
           variant="h5"
-          sx={{
-            textAlign: "center",
-            marginBottom: "40px",
-            fontWeight: "bold",
-          }}
+          textAlign="center"
+          fontWeight="bold"
+          marginBottom="28px"
         >
           What sex should we use to calculate your recommendations?
         </Typography>
@@ -60,28 +51,21 @@ export const ThirdBox = ({ changePage }: ThirdBoxProps) => {
         </ToggleButtonGroup>
       </Box>
       <Box>
-        <Typography variant="body2" align="center">
+        <Typography variant="body2" align="center" marginBottom="28px">
           We use this information to calculate and provide you with daily
           personalized recommendations.
         </Typography>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            marginTop: "20px",
-            alignItems: "start",
-          }}
+
+        <Button
+          onClick={() => setChangePage(changePage + 100)}
+          disabled={true && view === ""}
+          variant="contained"
+          size="large"
+          fullWidth
         >
-          <Button
-            disabled={true && view === ""}
-            variant="contained"
-            size="large"
-            fullWidth
-          >
-            NEXT
-          </Button>
-        </Box>
+          NEXT
+        </Button>
       </Box>
-    </Box>
+    </ContainerBox>
   );
 };

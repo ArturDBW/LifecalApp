@@ -1,5 +1,5 @@
-import { StarterModal } from "./pages/StarterModal";
+import { GetBasicInformation } from "./pages/GetBasicInformation";
 
 export const App = () => {
-  return <StarterModal />;
+  return <GetBasicInformation />;
 };
