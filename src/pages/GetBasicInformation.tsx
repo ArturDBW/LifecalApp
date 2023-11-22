@@ -1,11 +1,12 @@
 import { Box, Button, Paper } from "@mui/material";
-import backgroundImage from "../assets/health.avif";
 import { StarterInfo } from "../components/StarterInfo";
-import { useState } from "react";
 import { UserTarget } from "../components/UserTarget";
 import { UserGender } from "../components/UserGender";
 import { UserBody } from "../components/UserBody";
+import { useState } from "react";
+import backgroundImage from "../assets/health.avif";
 import styled from "styled-components";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 const ImageContainer = styled(Box)`
   width: 100vw;
@@ -16,6 +17,7 @@ const ImageContainer = styled(Box)`
   background-image: url(${backgroundImage});
   background-size: cover;
   background-position: center;
+  position: relative;
 `;
 
 const Window = styled(Paper)`
@@ -26,19 +28,27 @@ const Window = styled(Paper)`
   position: relative;
 `;
 
+const ReturnArrow = styled(ArrowBackIcon)`
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  cursor: pointer;
+  z-index: 10;
+`;
+
 export const GetBasicInformation = () => {
   const [changePage, setChangePage] = useState<number>(0);
 
   return (
     <ImageContainer>
-      <Box>
-        <Button onClick={() => setChangePage(changePage + 100)}>+</Button>
-        <Button onClick={() => setChangePage(changePage - 100)}>-</Button>
-      </Box>
       <Window elevation={8}>
-        <StarterInfo changePage={changePage} />
-        <UserTarget changePage={changePage} />
-        <UserGender changePage={changePage} />
+        <ReturnArrow
+          onClick={() => setChangePage(changePage - 100)}
+          sx={{ display: changePage === 0 ? "none" : "block" }}
+        />
+        <StarterInfo changePage={changePage} setChangePage={setChangePage} />
+        <UserTarget changePage={changePage} setChangePage={setChangePage} />
+        <UserGender changePage={changePage} setChangePage={setChangePage} />
         <UserBody changePage={changePage} />
       </Window>
     </ImageContainer>

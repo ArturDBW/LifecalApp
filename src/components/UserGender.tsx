@@ -1,5 +1,3 @@
-import { useState } from "react";
-import { ContainerBox } from "../styles/GetBasicInformationStyles";
 import {
   Box,
   Button,
@@ -7,12 +5,15 @@ import {
   ToggleButtonGroup,
   Typography,
 } from "@mui/material";
+import { useState } from "react";
+import { ContainerBox } from "../styles/GetBasicInformationStyles";
 
 type UserGenderProps = {
   changePage: number;
+  setChangePage: React.Dispatch<React.SetStateAction<number>>;
 };
 
-export const UserGender = ({ changePage }: UserGenderProps) => {
+export const UserGender = ({ changePage, setChangePage }: UserGenderProps) => {
   const [view, setView] = useState<string>("");
 
   const handleChange = (_: React.ChangeEvent<{}>, newValue: string) => {
@@ -56,6 +57,7 @@ export const UserGender = ({ changePage }: UserGenderProps) => {
         </Typography>
 
         <Button
+          onClick={() => setChangePage(changePage + 100)}
           disabled={true && view === ""}
           variant="contained"
           size="large"

@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 type StarterInfoProps = {
   changePage: number;
+  setChangePage: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const ContainerBox = styled(Box)`
@@ -14,7 +15,10 @@ const ContainerBox = styled(Box)`
   transition: transform 0.2s ease;
 `;
 
-export const StarterInfo = ({ changePage }: StarterInfoProps) => {
+export const StarterInfo = ({
+  changePage,
+  setChangePage,
+}: StarterInfoProps) => {
   return (
     <ContainerBox
       sx={{
@@ -40,7 +44,12 @@ export const StarterInfo = ({ changePage }: StarterInfoProps) => {
           Simplified.
         </Typography>
 
-        <Button variant="contained" size="large" fullWidth>
+        <Button
+          onClick={() => setChangePage(changePage + 100)}
+          variant="contained"
+          size="large"
+          fullWidth
+        >
           GET STARTED
         </Button>
       </Box>

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   Box,
   Button,
@@ -6,10 +5,12 @@ import {
   ToggleButtonGroup,
   Typography,
 } from "@mui/material";
+import { useState } from "react";
 import styled from "styled-components";
 
 type UserTargetProps = {
   changePage: number;
+  setChangePage: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const ContainerBox = styled(Box)`
@@ -24,7 +25,7 @@ const ContainerBox = styled(Box)`
   left: 0;
 `;
 
-export const UserTarget = ({ changePage }: UserTargetProps) => {
+export const UserTarget = ({ changePage, setChangePage }: UserTargetProps) => {
   const [view, setView] = useState<string>("");
 
   const handleChange = (_: React.ChangeEvent<{}>, newValue: string) => {
@@ -70,6 +71,7 @@ export const UserTarget = ({ changePage }: UserTargetProps) => {
           calculate your daily recommendations.
         </Typography>
         <Button
+          onClick={() => setChangePage(changePage + 100)}
           disabled={true && view === ""}
           variant="contained"
           size="large"
