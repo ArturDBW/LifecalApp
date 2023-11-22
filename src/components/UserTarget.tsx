@@ -26,7 +26,7 @@ const ContainerBox = styled(Box)`
 `;
 
 export const UserTarget = ({ changePage, setChangePage }: UserTargetProps) => {
-  const [view, setView] = useState<string>("");
+  const [view, setView] = useState<string | null>(null);
 
   const handleChange = (_: React.ChangeEvent<{}>, newValue: string) => {
     setView(newValue);
@@ -72,7 +72,7 @@ export const UserTarget = ({ changePage, setChangePage }: UserTargetProps) => {
         </Typography>
         <Button
           onClick={() => setChangePage(changePage + 100)}
-          disabled={true && view === ""}
+          disabled={true && view === null}
           variant="contained"
           size="large"
           fullWidth

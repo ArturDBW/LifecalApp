@@ -100,9 +100,15 @@ export const UserBody = ({ changePage }: UserBodyProps) => {
 
         <Button
           disabled={
-            (true && age === undefined) ||
+            age === undefined ||
             weight === undefined ||
-            height === undefined
+            height === undefined ||
+            age < 12 ||
+            age > 99 ||
+            weight < 35 ||
+            weight > 160 ||
+            height < 120 ||
+            height > 240
           }
           variant="contained"
           size="large"
