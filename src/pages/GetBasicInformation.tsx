@@ -17,7 +17,8 @@ const ImageContainer = styled(Box)`
   background-image: url(${backgroundImage});
   background-size: cover;
   background-position: center;
-  position: relative;
+  position: absolute;
+  top: 0;
 `;
 
 const Window = styled(Paper)`
