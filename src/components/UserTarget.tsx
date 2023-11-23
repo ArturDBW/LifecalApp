@@ -5,12 +5,15 @@ import {
   ToggleButtonGroup,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
+import { selectUser } from "../slice/userSlice";
 
 type UserTargetProps = {
   changePage: number;
   setChangePage: React.Dispatch<React.SetStateAction<number>>;
+  target: string | null;
+  setTarget: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
 const ContainerBox = styled(Box)`
@@ -25,12 +28,18 @@ const ContainerBox = styled(Box)`
   left: 0;
 `;
 
-export const UserTarget = ({ changePage, setChangePage }: UserTargetProps) => {
-  const [view, setView] = useState<string | null>(null);
-
+export const UserTarget = ({
+  changePage,
+  setChangePage,
+  target,
+  setTarget,
+}: UserTargetProps) => {
   const handleChange = (_: React.ChangeEvent<{}>, newValue: string) => {
-    setView(newValue);
+    setTarget(newValue);
   };
+
+  const user = useSelector(selectUser);
+  console.log(user);
 
   return (
     <ContainerBox
@@ -50,17 +59,17 @@ export const UserTarget = ({ changePage, setChangePage }: UserTargetProps) => {
         <ToggleButtonGroup
           orientation="vertical"
           fullWidth
-          value={view}
+          value={target}
           exclusive
           onChange={handleChange}
         >
-          <ToggleButton value="list" aria-label="list">
+          <ToggleButton value="loseWeight" aria-label="loseWeight">
             Lose Weight
           </ToggleButton>
-          <ToggleButton value="module" aria-label="module">
+          <ToggleButton value="maintainWeight" aria-label="maintainWeight">
             Maintain weight
           </ToggleButton>
-          <ToggleButton value="quilt" aria-label="quilt">
+          <ToggleButton value="gainWeight" aria-label="gainWeight">
             Gain weight
           </ToggleButton>
         </ToggleButtonGroup>
@@ -71,8 +80,10 @@ export const UserTarget = ({ changePage, setChangePage }: UserTargetProps) => {
           calculate your daily recommendations.
         </Typography>
         <Button
-          onClick={() => setChangePage(changePage + 100)}
-          disabled={true && view === null}
+          onClick={() => {
+            setChangePage(changePage + 100);
+          }}
+          disabled={true && target === null}
           variant="contained"
           size="large"
           fullWidth

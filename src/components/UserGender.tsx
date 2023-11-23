@@ -5,19 +5,23 @@ import {
   ToggleButtonGroup,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
 import { ContainerBox } from "../styles/GetBasicInformationStyles";
 
 type UserGenderProps = {
   changePage: number;
   setChangePage: React.Dispatch<React.SetStateAction<number>>;
+  gender: string | null;
+  setGender: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
-export const UserGender = ({ changePage, setChangePage }: UserGenderProps) => {
-  const [view, setView] = useState<string>("");
-
+export const UserGender = ({
+  changePage,
+  setChangePage,
+  gender,
+  setGender,
+}: UserGenderProps) => {
   const handleChange = (_: React.ChangeEvent<{}>, newValue: string) => {
-    setView(newValue);
+    setGender(newValue);
   };
 
   return (
@@ -38,14 +42,14 @@ export const UserGender = ({ changePage, setChangePage }: UserGenderProps) => {
         <ToggleButtonGroup
           orientation="vertical"
           sx={{ width: "100%" }}
-          value={view}
+          value={gender}
           exclusive
           onChange={handleChange}
         >
-          <ToggleButton value="list" aria-label="list">
+          <ToggleButton value="female" aria-label="female">
             Female
           </ToggleButton>
-          <ToggleButton value="module" aria-label="module">
+          <ToggleButton value="male" aria-label="male">
             Male
           </ToggleButton>
         </ToggleButtonGroup>
@@ -57,8 +61,10 @@ export const UserGender = ({ changePage, setChangePage }: UserGenderProps) => {
         </Typography>
 
         <Button
-          onClick={() => setChangePage(changePage + 100)}
-          disabled={true && view === ""}
+          onClick={() => {
+            setChangePage(changePage + 100);
+          }}
+          disabled={true && gender === null}
           variant="contained"
           size="large"
           fullWidth

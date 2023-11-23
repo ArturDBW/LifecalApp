@@ -1,9 +1,13 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 import styled from "styled-components";
+import { addItem } from "../slice/userSlice";
+import { useDispatch } from "react-redux";
 
 type UserBodyProps = {
   changePage: number;
+  target: string | null;
+  gender: string | null;
 };
 
 const ContainerBox = styled(Box)`
@@ -17,10 +21,53 @@ const ContainerBox = styled(Box)`
   top: 0;
   left: 0;
 `;
-export const UserBody = ({ changePage }: UserBodyProps) => {
+export const UserBody = ({ changePage, target, gender }: UserBodyProps) => {
   const [age, setAge] = useState<number | undefined>();
   const [weight, setWeight] = useState<number | undefined>();
   const [height, setHeight] = useState<number | undefined>();
+
+  const calculateCalories = (
+    age: number | undefined = 0,
+    weight: number | undefined = 0,
+    height: number | undefined = 0
+  ) => {
+    const baseCalories = Math.trunc(
+      (10 * weight + 6.25 * height - 5 * age) * 1.8
+    );
+
+    return gender === "male" ? baseCalories + 5 : baseCalories - 126;
+  };
+
+  const calories = calculateCalories(age, weight, height);
+
+  const calculateCarbohydrates = (calories: number) => {
+    return Math.trunc((calories * 0.55) / 4);
+  };
+
+  const calculateWhey = (calories: number) => {
+    return Math.trunc((calories * 0.2) / 4);
+  };
+
+  const calculateFat = (calories: number) => {
+    return Math.trunc((calories * 0.25) / 9);
+  };
+
+  const dispatch = useDispatch();
+
+  const handleAddInformation = () => {
+    const information = {
+      userAge: age,
+      userWeight: weight,
+      userHeight: height,
+      userTarget: target,
+      userGender: gender,
+      userCaloriesNeeds: calories,
+      userCarbohydratesNeeds: calculateCarbohydrates(calories),
+      userWheyNeeds: calculateWhey(calories),
+      userFatNeeds: calculateFat(calories),
+    };
+    dispatch(addItem(information));
+  };
 
   return (
     <ContainerBox
@@ -99,6 +146,7 @@ export const UserBody = ({ changePage }: UserBodyProps) => {
         </Typography>
 
         <Button
+          onClick={handleAddInformation}
           disabled={
             age === undefined ||
             weight === undefined ||
