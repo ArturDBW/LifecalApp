@@ -39,6 +39,9 @@ const ReturnArrow = styled(ArrowBackIcon)`
 export const GetBasicInformation = () => {
   const [changePage, setChangePage] = useState<number>(0);
 
+  const [target, setTarget] = useState<string | null>(null);
+  const [gender, setGender] = useState<string | null>(null);
+
   return (
     <ImageContainer>
       <Window elevation={8}>
@@ -47,9 +50,19 @@ export const GetBasicInformation = () => {
           sx={{ display: changePage === 0 ? "none" : "block" }}
         />
         <StarterInfo changePage={changePage} setChangePage={setChangePage} />
-        <UserTarget changePage={changePage} setChangePage={setChangePage} />
-        <UserGender changePage={changePage} setChangePage={setChangePage} />
-        <UserBody changePage={changePage} />
+        <UserTarget
+          changePage={changePage}
+          setChangePage={setChangePage}
+          target={target}
+          setTarget={setTarget}
+        />
+        <UserGender
+          changePage={changePage}
+          setChangePage={setChangePage}
+          gender={gender}
+          setGender={setGender}
+        />
+        <UserBody changePage={changePage} target={target} gender={gender} />
       </Window>
     </ImageContainer>
   );

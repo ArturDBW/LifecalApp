@@ -5,14 +5,15 @@ import {
   ToggleButtonGroup,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { addItem, selectUser } from "../slice/userSlice";
+import { selectUser } from "../slice/userSlice";
 
 type UserTargetProps = {
   changePage: number;
   setChangePage: React.Dispatch<React.SetStateAction<number>>;
+  target: string | null;
+  setTarget: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
 const ContainerBox = styled(Box)`
@@ -27,21 +28,14 @@ const ContainerBox = styled(Box)`
   left: 0;
 `;
 
-export const UserTarget = ({ changePage, setChangePage }: UserTargetProps) => {
-  const [view, setView] = useState<string | null>(null);
-
+export const UserTarget = ({
+  changePage,
+  setChangePage,
+  target,
+  setTarget,
+}: UserTargetProps) => {
   const handleChange = (_: React.ChangeEvent<{}>, newValue: string) => {
-    setView(newValue);
-  };
-
-  const dispatch = useDispatch();
-
-  const handleAddInformation = () => {
-    const information = {
-      userTarget: view,
-    };
-    dispatch(addItem(information));
-    setChangePage(changePage + 100);
+    setTarget(newValue);
   };
 
   const user = useSelector(selectUser);
@@ -65,7 +59,7 @@ export const UserTarget = ({ changePage, setChangePage }: UserTargetProps) => {
         <ToggleButtonGroup
           orientation="vertical"
           fullWidth
-          value={view}
+          value={target}
           exclusive
           onChange={handleChange}
         >
@@ -86,8 +80,10 @@ export const UserTarget = ({ changePage, setChangePage }: UserTargetProps) => {
           calculate your daily recommendations.
         </Typography>
         <Button
-          onClick={handleAddInformation}
-          disabled={true && view === null}
+          onClick={() => {
+            setChangePage(changePage + 100);
+          }}
+          disabled={true && target === null}
           variant="contained"
           size="large"
           fullWidth

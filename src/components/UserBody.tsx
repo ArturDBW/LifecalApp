@@ -6,6 +6,8 @@ import { useDispatch } from "react-redux";
 
 type UserBodyProps = {
   changePage: number;
+  target: string | null;
+  gender: string | null;
 };
 
 const ContainerBox = styled(Box)`
@@ -19,7 +21,7 @@ const ContainerBox = styled(Box)`
   top: 0;
   left: 0;
 `;
-export const UserBody = ({ changePage }: UserBodyProps) => {
+export const UserBody = ({ changePage, target, gender }: UserBodyProps) => {
   const [age, setAge] = useState<number | undefined>();
   const [weight, setWeight] = useState<number | undefined>();
   const [height, setHeight] = useState<number | undefined>();
@@ -31,6 +33,8 @@ export const UserBody = ({ changePage }: UserBodyProps) => {
       userAge: age,
       userWeight: weight,
       userHeight: height,
+      userTarget: target,
+      userGender: gender,
     };
     dispatch(addItem(information));
   };
