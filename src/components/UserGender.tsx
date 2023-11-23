@@ -7,6 +7,8 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { ContainerBox } from "../styles/GetBasicInformationStyles";
+import { useDispatch } from "react-redux";
+import { addItem } from "../slice/userSlice";
 
 type UserGenderProps = {
   changePage: number;
@@ -18,6 +20,17 @@ export const UserGender = ({ changePage, setChangePage }: UserGenderProps) => {
 
   const handleChange = (_: React.ChangeEvent<{}>, newValue: string) => {
     setView(newValue);
+  };
+
+  const dispatch = useDispatch();
+
+  const handleAddInformation = () => {
+    setChangePage(changePage + 100);
+
+    const information = {
+      userGender: view,
+    };
+    dispatch(addItem(information));
   };
 
   return (
@@ -42,10 +55,10 @@ export const UserGender = ({ changePage, setChangePage }: UserGenderProps) => {
           exclusive
           onChange={handleChange}
         >
-          <ToggleButton value="list" aria-label="list">
+          <ToggleButton value="female" aria-label="female">
             Female
           </ToggleButton>
-          <ToggleButton value="module" aria-label="module">
+          <ToggleButton value="male" aria-label="male">
             Male
           </ToggleButton>
         </ToggleButtonGroup>
@@ -57,7 +70,7 @@ export const UserGender = ({ changePage, setChangePage }: UserGenderProps) => {
         </Typography>
 
         <Button
-          onClick={() => setChangePage(changePage + 100)}
+          onClick={handleAddInformation}
           disabled={true && view === ""}
           variant="contained"
           size="large"

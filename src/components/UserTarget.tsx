@@ -6,7 +6,9 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { addItem, selectUser } from "../slice/userSlice";
 
 type UserTargetProps = {
   changePage: number;
@@ -32,6 +34,19 @@ export const UserTarget = ({ changePage, setChangePage }: UserTargetProps) => {
     setView(newValue);
   };
 
+  const dispatch = useDispatch();
+
+  const handleAddInformation = () => {
+    const information = {
+      userTarget: view,
+    };
+    dispatch(addItem(information));
+    setChangePage(changePage + 100);
+  };
+
+  const user = useSelector(selectUser);
+  console.log(user);
+
   return (
     <ContainerBox
       sx={{
@@ -54,13 +69,13 @@ export const UserTarget = ({ changePage, setChangePage }: UserTargetProps) => {
           exclusive
           onChange={handleChange}
         >
-          <ToggleButton value="list" aria-label="list">
+          <ToggleButton value="loseWeight" aria-label="loseWeight">
             Lose Weight
           </ToggleButton>
-          <ToggleButton value="module" aria-label="module">
+          <ToggleButton value="maintainWeight" aria-label="maintainWeight">
             Maintain weight
           </ToggleButton>
-          <ToggleButton value="quilt" aria-label="quilt">
+          <ToggleButton value="gainWeight" aria-label="gainWeight">
             Gain weight
           </ToggleButton>
         </ToggleButtonGroup>
@@ -71,7 +86,7 @@ export const UserTarget = ({ changePage, setChangePage }: UserTargetProps) => {
           calculate your daily recommendations.
         </Typography>
         <Button
-          onClick={() => setChangePage(changePage + 100)}
+          onClick={handleAddInformation}
           disabled={true && view === null}
           variant="contained"
           size="large"

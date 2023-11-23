@@ -1,6 +1,8 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 import styled from "styled-components";
+import { addItem } from "../slice/userSlice";
+import { useDispatch } from "react-redux";
 
 type UserBodyProps = {
   changePage: number;
@@ -21,6 +23,17 @@ export const UserBody = ({ changePage }: UserBodyProps) => {
   const [age, setAge] = useState<number | undefined>();
   const [weight, setWeight] = useState<number | undefined>();
   const [height, setHeight] = useState<number | undefined>();
+
+  const dispatch = useDispatch();
+
+  const handleAddInformation = () => {
+    const information = {
+      userAge: age,
+      userWeight: weight,
+      userHeight: height,
+    };
+    dispatch(addItem(information));
+  };
 
   return (
     <ContainerBox
@@ -99,6 +112,7 @@ export const UserBody = ({ changePage }: UserBodyProps) => {
         </Typography>
 
         <Button
+          onClick={handleAddInformation}
           disabled={
             age === undefined ||
             weight === undefined ||
