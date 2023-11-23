@@ -26,6 +26,16 @@ export const UserBody = ({ changePage, target, gender }: UserBodyProps) => {
   const [weight, setWeight] = useState<number | undefined>();
   const [height, setHeight] = useState<number | undefined>();
 
+  const calculateCalories = (
+    age: number | undefined = 0,
+    weight: number | undefined = 0,
+    height: number | undefined = 0
+  ) => {
+    const baseCalories = (10 * weight + 6.25 * height - 5 * age) * 1.8;
+
+    return gender === "male" ? baseCalories + 5 : baseCalories - 126;
+  };
+
   const dispatch = useDispatch();
 
   const handleAddInformation = () => {
@@ -35,6 +45,7 @@ export const UserBody = ({ changePage, target, gender }: UserBodyProps) => {
       userHeight: height,
       userTarget: target,
       userGender: gender,
+      userCalories: calculateCalories(age, weight, height),
     };
     dispatch(addItem(information));
   };
