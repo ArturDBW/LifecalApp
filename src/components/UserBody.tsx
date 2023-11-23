@@ -31,9 +31,25 @@ export const UserBody = ({ changePage, target, gender }: UserBodyProps) => {
     weight: number | undefined = 0,
     height: number | undefined = 0
   ) => {
-    const baseCalories = (10 * weight + 6.25 * height - 5 * age) * 1.8;
+    const baseCalories = Math.trunc(
+      (10 * weight + 6.25 * height - 5 * age) * 1.8
+    );
 
     return gender === "male" ? baseCalories + 5 : baseCalories - 126;
+  };
+
+  const calories = calculateCalories(age, weight, height);
+
+  const calculateCarbohydrates = (calories: number) => {
+    return Math.trunc((calories * 0.55) / 4);
+  };
+
+  const calculateWhey = (calories: number) => {
+    return Math.trunc((calories * 0.2) / 4);
+  };
+
+  const calculateFat = (calories: number) => {
+    return Math.trunc((calories * 0.25) / 9);
   };
 
   const dispatch = useDispatch();
@@ -45,7 +61,10 @@ export const UserBody = ({ changePage, target, gender }: UserBodyProps) => {
       userHeight: height,
       userTarget: target,
       userGender: gender,
-      userCalories: calculateCalories(age, weight, height),
+      userCaloriesNeeds: calories,
+      userCarbohydratesNeeds: calculateCarbohydrates(calories),
+      userWheyNeeds: calculateWhey(calories),
+      userFatNeeds: calculateFat(calories),
     };
     dispatch(addItem(information));
   };

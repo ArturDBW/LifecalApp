@@ -38,7 +38,6 @@ const ReturnArrow = styled(ArrowBackIcon)`
 
 export const GetBasicInformation = () => {
   const [changePage, setChangePage] = useState<number>(0);
-
   const [target, setTarget] = useState<string | null>(null);
   const [gender, setGender] = useState<string | null>(null);
 
