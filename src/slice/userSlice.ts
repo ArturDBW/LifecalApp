@@ -18,6 +18,6 @@ export const { addItem } = userSlice.actions;
 
 export default userSlice.reducer;
 
-export const getUser = (state) => state.user.user;
+export const userData = (state) => state.user.user;
 
 export const selectUser = (state) => state.user.user;

@@ -1,12 +1,12 @@
 import { Box, Button, ToggleButton } from "@mui/material";
-import { useSelector } from "react-redux";
-import { selectUser } from "../slice/userSlice";
 import {
   ContainerStyled,
   HeaderStyled,
   ToggleButtonGroupStyled,
   TypographyStyled,
 } from "../styles/UserTargetStyles";
+import { useSelector } from "react-redux";
+import { selectUser } from "../slice/userSlice";
 
 type UserTargetProps = {
   changePage: number;
