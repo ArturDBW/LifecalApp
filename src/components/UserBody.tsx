@@ -3,32 +3,18 @@ import { useState } from "react";
 import styled from "styled-components";
 import { addItem } from "../slice/userSlice";
 import { useDispatch } from "react-redux";
+import {
+  ContainerStyled,
+  HeaderStyled,
+  TextFieldStyled,
+  TypographyStyled,
+} from "../styles/UserBodyStyles";
 
 type UserBodyProps = {
   changePage: number;
   target: string | null;
   gender: string | null;
 };
-
-const ContainerBox = styled(Box)`
-  padding: 20px;
-  height: 60vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  transition: transform 0.2s ease;
-  position: absolute;
-  top: 0;
-  left: 0;
-`;
-
-const HeaderStyled = styled(Typography).attrs({
-  variant: "h5",
-  textAlign: "center",
-  fontWeight: "bold",
-})`
-  margin-bottom: "28px";
-`;
 
 type CaloriesForm = {
   age: number | null;
@@ -88,20 +74,14 @@ export const UserBody = ({ changePage, target, gender }: UserBodyProps) => {
   };
 
   return (
-    <ContainerBox
-      sx={{
-        transform: `translateX(${300 - changePage}%)`,
-      }}
-    >
+    <ContainerStyled changePage={changePage}>
       <Box>
         <HeaderStyled>
           We need information about your age, weight and height.
         </HeaderStyled>
-        <TextField
+        <TextFieldStyled
           id="outlined-basic"
           label="Your age"
-          variant="outlined"
-          fullWidth
           type="number"
           value={age !== null ? age.toString() : ""}
           onChange={(e) => {
@@ -117,11 +97,9 @@ export const UserBody = ({ changePage, target, gender }: UserBodyProps) => {
             age !== null && (age < 12 || age > 99) ? "Invalid age." : ""
           }
         />
-        <TextField
+        <TextFieldStyled
           id="outlined-basic"
           label="Your weight (kg)"
-          variant="outlined"
-          fullWidth
           type="number"
           value={weight !== null ? weight.toString() : ""}
           onChange={(e) => {
@@ -139,11 +117,9 @@ export const UserBody = ({ changePage, target, gender }: UserBodyProps) => {
               : ""
           }
         />
-        <TextField
+        <TextFieldStyled
           id="outlined-basic"
           label="Your height (cm)"
-          variant="outlined"
-          fullWidth
           value={height !== null ? height.toString() : ""}
           onChange={(e) => {
             const newValue = parseInt(e.target.value, 10);
@@ -162,10 +138,10 @@ export const UserBody = ({ changePage, target, gender }: UserBodyProps) => {
         />
       </Box>
       <Box>
-        <Typography variant="body2" align="center" marginBottom="28px">
+        <TypographyStyled>
           We use this information to calculate and provide you with daily
           personalized recommendations.
-        </Typography>
+        </TypographyStyled>
 
         <Button
           onClick={handleAddInformation}
@@ -187,6 +163,6 @@ export const UserBody = ({ changePage, target, gender }: UserBodyProps) => {
           NEXT
         </Button>
       </Box>
-    </ContainerBox>
+    </ContainerStyled>
   );
 };

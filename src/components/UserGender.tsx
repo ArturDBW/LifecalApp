@@ -1,11 +1,10 @@
+import { Box, Button, ToggleButton } from "@mui/material";
 import {
-  Box,
-  Button,
-  ToggleButton,
-  ToggleButtonGroup,
-  Typography,
-} from "@mui/material";
-import { ContainerBox } from "../styles/GetBasicInformationStyles";
+  ContainerStyled,
+  ToggleButtonGroupStyled,
+  TypographyStyled,
+} from "../styles/UserGenderStyles";
+import { HeaderStyled } from "../styles/UserGenderStyles";
 
 type UserGenderProps = {
   changePage: number;
@@ -25,40 +24,25 @@ export const UserGender = ({
   };
 
   return (
-    <ContainerBox
-      sx={{
-        transform: `translateX(${200 - changePage}%)`,
-      }}
-    >
+    <ContainerStyled changePage={changePage}>
       <Box>
-        <Typography
-          variant="h5"
-          textAlign="center"
-          fontWeight="bold"
-          marginBottom="28px"
-        >
+        <HeaderStyled>
           What sex should we use to calculate your recommendations?
-        </Typography>
-        <ToggleButtonGroup
-          orientation="vertical"
-          sx={{ width: "100%" }}
-          value={gender}
-          exclusive
-          onChange={handleChange}
-        >
+        </HeaderStyled>
+        <ToggleButtonGroupStyled value={gender} onChange={handleChange}>
           <ToggleButton value="female" aria-label="female">
             Female
           </ToggleButton>
           <ToggleButton value="male" aria-label="male">
             Male
           </ToggleButton>
-        </ToggleButtonGroup>
+        </ToggleButtonGroupStyled>
       </Box>
       <Box>
-        <Typography variant="body2" align="center" marginBottom="28px">
+        <TypographyStyled>
           We use this information to calculate and provide you with daily
           personalized recommendations.
-        </Typography>
+        </TypographyStyled>
 
         <Button
           onClick={() => {
@@ -72,6 +56,6 @@ export const UserGender = ({
           NEXT
         </Button>
       </Box>
-    </ContainerBox>
+    </ContainerStyled>
   );
 };

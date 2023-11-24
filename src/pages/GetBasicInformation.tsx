@@ -1,39 +1,21 @@
-import { Box, Paper } from "@mui/material";
+// import { Box, Paper } from "@mui/material";
 import { StarterInfo } from "../components/StarterInfo";
 import { UserTarget } from "../components/UserTarget";
 import { UserGender } from "../components/UserGender";
 import { UserBody } from "../components/OLDUserBody";
 import { useState } from "react";
-import backgroundImage from "../assets/health.avif";
 import styled from "styled-components";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-
-const ImageContainer = styled(Box)`
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-image: url(${backgroundImage});
-  background-size: cover;
-  background-position: center;
-  position: absolute;
-  top: 0;
-`;
-
-const PaperStyled = styled(Paper)`
-  min-height: 60vh;
-  width: 360px;
-  background-color: transparent;
-  overflow: hidden;
-  position: relative;
-`;
+import {
+  ImageContainer,
+  PaperStyled,
+} from "../styles/GetBasicInformationStyles";
 
 type ReturnArrowProps = {
   changePage: number;
 };
 
-const ReturnArrow = styled(ArrowBackIcon).withConfig({
+export const ReturnArrow = styled(ArrowBackIcon).withConfig({
   shouldForwardProp: (prop) => !["changePage"].includes(prop),
 })<ReturnArrowProps>`
   position: absolute;
