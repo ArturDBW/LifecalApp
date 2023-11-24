@@ -1,6 +1,5 @@
-import { Box, Button, TextField, Typography } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { useState } from "react";
-import styled from "styled-components";
 import { addItem } from "../slice/userSlice";
 import { useDispatch } from "react-redux";
 import {
@@ -9,6 +8,7 @@ import {
   TextFieldStyled,
   TypographyStyled,
 } from "../styles/UserBodyStyles";
+import { Link } from "react-router-dom";
 
 type UserBodyProps = {
   changePage: number;
@@ -16,14 +16,14 @@ type UserBodyProps = {
   gender: string | null;
 };
 
-type CaloriesForm = {
+type DataFormTypes = {
   age: number | null;
   weight: number | null;
   height: number | null;
 };
 
 export const UserBody = ({ changePage, target, gender }: UserBodyProps) => {
-  const [form, setForm] = useState<CaloriesForm>({
+  const [form, setForm] = useState<DataFormTypes>({
     age: null,
     weight: null,
     height: null,
@@ -31,9 +31,13 @@ export const UserBody = ({ changePage, target, gender }: UserBodyProps) => {
 
   const { age, weight, height } = form;
 
-  const calculateCalories = () => {
+  const calculateCalories = (
+    age: number | null = 0,
+    weight: number | null = 0,
+    height: number | null = 0
+  ) => {
     if (age === null || height === null || weight === null) {
-      throw new Error("Musisz ustawić wszystkie wartości");
+      throw new Error("Uzupełnij wszystkie wartości");
     }
     const baseCalories = Math.trunc(
       (10 * weight + 6.25 * height - 5 * age) * 1.8
@@ -60,9 +64,9 @@ export const UserBody = ({ changePage, target, gender }: UserBodyProps) => {
 
   const handleAddInformation = () => {
     const information = {
-      userAge: form.age,
-      userWeight: form.weight,
-      userHeight: form.height,
+      userAge: age,
+      userWeight: weight,
+      userHeight: height,
       userTarget: target,
       userGender: gender,
       userCaloriesNeeds: calories,
@@ -162,6 +166,7 @@ export const UserBody = ({ changePage, target, gender }: UserBodyProps) => {
         >
           NEXT
         </Button>
+        <Link to="/home">testowy link do home</Link>
       </Box>
     </ContainerStyled>
   );

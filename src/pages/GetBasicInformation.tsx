@@ -2,7 +2,7 @@
 import { StarterInfo } from "../components/StarterInfo";
 import { UserTarget } from "../components/UserTarget";
 import { UserGender } from "../components/UserGender";
-import { UserBody } from "../components/OLDUserBody";
+import { UserBody } from "../components/UserBody";
 import { useState } from "react";
 import styled from "styled-components";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";

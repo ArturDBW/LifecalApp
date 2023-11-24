@@ -21,7 +21,7 @@ const ContainerBox = styled(Box)`
   top: 0;
   left: 0;
 `;
-export const UserBody = ({ changePage, target, gender }: UserBodyProps) => {
+export const UserBodyTest = ({ changePage, target, gender }: UserBodyProps) => {
   const [age, setAge] = useState<number | undefined>();
   const [weight, setWeight] = useState<number | undefined>();
   const [height, setHeight] = useState<number | undefined>();
