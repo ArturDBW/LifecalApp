@@ -83,7 +83,7 @@ export const UserTarget = ({
           onClick={() => {
             setChangePage(changePage + 100);
           }}
-          disabled={true && target === null}
+          disabled={target === null}
           variant="contained"
           size="large"
           fullWidth

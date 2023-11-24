@@ -21,34 +21,16 @@ const ContainerBox = styled(Box)`
   top: 0;
   left: 0;
 `;
-
-const HeaderStyled = styled(Typography).attrs({
-  variant: "h5",
-  textAlign: "center",
-  fontWeight: "bold",
-})`
-  margin-bottom: "28px";
-`;
-
-type CaloriesForm = {
-  age: number | null;
-  weight: number | null;
-  height: number | null;
-};
-
 export const UserBody = ({ changePage, target, gender }: UserBodyProps) => {
-  const [form, setForm] = useState<CaloriesForm>({
-    age: null,
-    weight: null,
-    height: null,
-  });
+  const [age, setAge] = useState<number | undefined>();
+  const [weight, setWeight] = useState<number | undefined>();
+  const [height, setHeight] = useState<number | undefined>();
 
-  const { age, weight, height } = form;
-
-  const calculateCalories = () => {
-    if (age === null || height === null || weight === null) {
-      throw new Error("Musisz ustawić wszystkie wartości");
-    }
+  const calculateCalories = (
+    age: number | undefined = 0,
+    weight: number | undefined = 0,
+    height: number | undefined = 0
+  ) => {
     const baseCalories = Math.trunc(
       (10 * weight + 6.25 * height - 5 * age) * 1.8
     );
@@ -56,7 +38,7 @@ export const UserBody = ({ changePage, target, gender }: UserBodyProps) => {
     return gender === "male" ? baseCalories + 5 : baseCalories - 126;
   };
 
-  const calories = calculateCalories();
+  const calories = calculateCalories(age, weight, height);
 
   const calculateCarbohydrates = (calories: number) => {
     return Math.trunc((calories * 0.55) / 4);
@@ -74,9 +56,9 @@ export const UserBody = ({ changePage, target, gender }: UserBodyProps) => {
 
   const handleAddInformation = () => {
     const information = {
-      userAge: form.age,
-      userWeight: form.weight,
-      userHeight: form.height,
+      userAge: age,
+      userWeight: weight,
+      userHeight: height,
       userTarget: target,
       userGender: gender,
       userCaloriesNeeds: calories,
@@ -94,27 +76,29 @@ export const UserBody = ({ changePage, target, gender }: UserBodyProps) => {
       }}
     >
       <Box>
-        <HeaderStyled>
+        <Typography
+          variant="h5"
+          textAlign="center"
+          fontWeight="bold"
+          marginBottom="28px"
+        >
           We need information about your age, weight and height.
-        </HeaderStyled>
+        </Typography>
         <TextField
           id="outlined-basic"
           label="Your age"
           variant="outlined"
           fullWidth
           type="number"
-          value={age !== null ? age.toString() : ""}
+          value={age !== undefined ? age.toString() : ""}
           onChange={(e) => {
             const newValue = parseInt(e.target.value, 10);
-            setForm((previousValue) => ({
-              ...previousValue,
-              age: isNaN(newValue) ? null : newValue,
-            }));
+            setAge(isNaN(newValue) ? undefined : newValue);
           }}
           sx={{ marginBottom: "20px" }}
-          error={age !== null ? age < 12 || age > 99 : false}
+          error={age !== undefined ? age < 12 || age > 99 : false}
           helperText={
-            age !== null && (age < 12 || age > 99) ? "Invalid age." : ""
+            age !== undefined && (age < 12 || age > 99) ? "Invalid age." : ""
           }
         />
         <TextField
@@ -123,18 +107,15 @@ export const UserBody = ({ changePage, target, gender }: UserBodyProps) => {
           variant="outlined"
           fullWidth
           type="number"
-          value={weight !== null ? weight.toString() : ""}
+          value={weight !== undefined ? weight.toString() : ""}
           onChange={(e) => {
             const newValue = parseInt(e.target.value, 10);
-            setForm((previousValue) => ({
-              ...previousValue,
-              weight: isNaN(newValue) ? null : newValue,
-            }));
+            setWeight(isNaN(newValue) ? undefined : newValue);
           }}
           sx={{ marginBottom: "20px" }}
-          error={weight !== null ? weight < 35 || weight > 160 : false}
+          error={weight !== undefined ? weight < 35 || weight > 160 : false}
           helperText={
-            weight !== null && (weight < 35 || weight > 160)
+            weight !== undefined && (weight < 35 || weight > 160)
               ? "Invalid weight."
               : ""
           }
@@ -144,18 +125,15 @@ export const UserBody = ({ changePage, target, gender }: UserBodyProps) => {
           label="Your height (cm)"
           variant="outlined"
           fullWidth
-          value={height !== null ? height.toString() : ""}
+          value={height !== undefined ? height.toString() : ""}
           onChange={(e) => {
             const newValue = parseInt(e.target.value, 10);
-            setForm((previousValue) => ({
-              ...previousValue,
-              height: isNaN(newValue) ? null : newValue,
-            }));
+            setHeight(isNaN(newValue) ? undefined : newValue);
           }}
           type="number"
-          error={height !== null ? height < 120 || height > 240 : false}
+          error={height !== undefined ? height < 120 || height > 240 : false}
           helperText={
-            height !== null && (height < 120 || height > 240)
+            height !== undefined && (height < 120 || height > 240)
               ? "Invalid height."
               : ""
           }
@@ -169,13 +147,10 @@ export const UserBody = ({ changePage, target, gender }: UserBodyProps) => {
 
         <Button
           onClick={handleAddInformation}
-          variant="contained"
-          size="large"
-          fullWidth
           disabled={
-            age === null ||
-            weight === null ||
-            height === null ||
+            age === undefined ||
+            weight === undefined ||
+            height === undefined ||
             age < 12 ||
             age > 99 ||
             weight < 35 ||
@@ -183,6 +158,9 @@ export const UserBody = ({ changePage, target, gender }: UserBodyProps) => {
             height < 120 ||
             height > 240
           }
+          variant="contained"
+          size="large"
+          fullWidth
         >
           NEXT
         </Button>

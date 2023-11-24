@@ -64,7 +64,7 @@ export const UserGender = ({
           onClick={() => {
             setChangePage(changePage + 100);
           }}
-          disabled={true && gender === null}
+          disabled={gender === null}
           variant="contained"
           size="large"
           fullWidth
