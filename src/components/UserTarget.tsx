@@ -5,8 +5,6 @@ import {
   ToggleButtonGroupStyled,
   TypographyStyled,
 } from "../styles/UserTargetStyles";
-import { useSelector } from "react-redux";
-import { selectUser } from "../slice/userSlice";
 
 type UserTargetProps = {
   changePage: number;
@@ -24,9 +22,6 @@ export const UserTarget = ({
   const handleChange = (_: React.ChangeEvent<{}>, newValue: string) => {
     setTarget(newValue);
   };
-
-  const user = useSelector(selectUser);
-  console.log(user);
 
   return (
     <ContainerStyled changePage={changePage}>

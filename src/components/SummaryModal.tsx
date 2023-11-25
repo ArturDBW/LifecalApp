@@ -3,6 +3,8 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { ProgressBar } from "../elements/ProgressBar";
+import { useSelector } from "react-redux";
+import { selectUser } from "../slice/userSlice";
 
 const BoxStyled = styled(Box)`
   position: absolute;
@@ -44,6 +46,9 @@ export const SummaryModal = () => {
   const [openModal, setOpenModal] = React.useState(false);
   const handleOpen = () => setOpenModal(true);
 
+  const user = useSelector(selectUser);
+  const calories: number = user[0]?.userCaloriesNeeds;
+
   return (
     <div>
       <Button onClick={handleOpen}>Open modal</Button>
@@ -60,7 +65,7 @@ export const SummaryModal = () => {
 
           <ProgressBar
             backgroundColorStyled="#29e652"
-            widthStyled={3221}
+            widthStyled={calories}
             macroType="Calories"
           />
           <ProgressBar
