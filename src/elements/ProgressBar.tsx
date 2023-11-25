@@ -3,29 +3,59 @@ import styled from "styled-components";
 const ProgressBarOutside = styled.div`
   width: 100%;
   height: 6px;
-  background-color: #dfdcdc;
+  background-color: #eee;
   border-radius: 30px;
   margin-top: 4px;
 `;
-const ProgressBarInside = styled.div`
-  width: 40%;
+
+type ProgressBarInsideProps = {
+  backgroundColorStyled: string;
+  widthStyled: number;
+};
+
+const ProgressBarInside = styled.div.withConfig({
+  shouldForwardProp: (prop) =>
+    !["backgroundColorStyled", "widthStyled"].includes(prop),
+})<ProgressBarInsideProps>`
+  background-color: ${({ backgroundColorStyled }) =>
+    `${backgroundColorStyled}`};
+  width: ${({ widthStyled }) =>
+    `${widthStyled > 100 ? (widthStyled = 100) : widthStyled}%`};
   height: 100%;
-  background-color: orange;
+  border-radius: 30px;
 `;
+
 const DataContainer = styled.div`
   display: flex;
   justify-content: space-between;
+  margin-top: 12px;
 `;
 
-export const ProgressBar = () => {
+type ProgressBarProps = {
+  backgroundColorStyled: string;
+  widthStyled: number;
+  macroType: string;
+};
+
+export const ProgressBar = ({
+  backgroundColorStyled,
+  widthStyled,
+  macroType,
+}: ProgressBarProps) => {
   return (
     <>
       <DataContainer>
-        <span>Whey</span>
-        <span>40%</span>
+        <span>{macroType}</span>
+        <span>
+          {widthStyled}
+          {macroType === "Calories" ? " kcal" : "%"}
+        </span>
       </DataContainer>
       <ProgressBarOutside>
-        <ProgressBarInside></ProgressBarInside>
+        <ProgressBarInside
+          backgroundColorStyled={backgroundColorStyled}
+          widthStyled={widthStyled}
+        ></ProgressBarInside>
       </ProgressBarOutside>
     </>
   );

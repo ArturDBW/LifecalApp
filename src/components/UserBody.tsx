@@ -66,7 +66,7 @@ const calculateCalories = ({
 };
 
 const calculateCarbohydrates = (calories: number) => {
-  return Math.trunc((calories * 0.55) / 4);
+  return Math.trunc((calories * 0.5) / 4);
 };
 
 const calculateWhey = (calories: number) => {
@@ -74,7 +74,7 @@ const calculateWhey = (calories: number) => {
 };
 
 const calculateFat = (calories: number) => {
-  return Math.trunc((calories * 0.25) / 9);
+  return Math.trunc((calories * 0.3) / 9);
 };
 
 export const UserBody = ({ changePage, target, gender }: UserBodyProps) => {

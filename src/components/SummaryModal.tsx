@@ -4,64 +4,86 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { ProgressBar } from "../elements/ProgressBar";
 
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 360,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
-
-const Paseczek = styled.div`
-  width: 300px;
-  height: 6px;
-
-  border-radius: 30px;
-  background-color: #cecece;
+const BoxStyled = styled(Box)`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 360px;
+  padding: 24px;
+  background-color: white;
+  border-radius: 10px;
 `;
 
-const PaseczekwSrodku = styled.div`
-  width: 60%;
-  background-color: #039c03;
-  height: 100%;
-  border-radius: 30px;
+const HeaderStyled = styled(Typography).attrs({
+  variant: "h4",
+})`
+  text-align: center;
+`;
+
+const ShortDescriptionStyled = styled(Typography).attrs({
+  variant: "h6",
+  mt: 4,
+  mb: 2,
+})`
+  text-align: center;
+  margin-top: 24px;
+`;
+
+const ButtonStyled = styled(Button).attrs({
+  size: "large",
+  variant: "contained",
+  fullWidth: true,
+})``;
+
+const ButtonContainer = styled.div`
+  margin-top: 24px;
 `;
 
 export const SummaryModal = () => {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
+  const [openModal, setOpenModal] = React.useState(false);
+  const handleOpen = () => setOpenModal(true);
 
   return (
     <div>
       <Button onClick={handleOpen}>Open modal</Button>
       <Modal
-        open={open}
+        open={openModal}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Your personalized health plan is ready!
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+        <BoxStyled>
+          <HeaderStyled>Your personalized health plan is ready!</HeaderStyled>
+          <ShortDescriptionStyled>
             Daily nutritional recommendations
-          </Typography>
-          <Typography>Calories</Typography>
-          <Paseczek>
-            <PaseczekwSrodku></PaseczekwSrodku>
-          </Paseczek>
-          <ProgressBar />
-          <Typography>xdd</Typography>
-          <Link to="/home">
-            <Button variant="contained" size="large" fullWidth>
-              testowy link do home
-            </Button>
-          </Link>
-        </Box>
+          </ShortDescriptionStyled>
+
+          <ProgressBar
+            backgroundColorStyled="#29e652"
+            widthStyled={3221}
+            macroType="Calories"
+          />
+          <ProgressBar
+            backgroundColorStyled="#e69429"
+            widthStyled={50}
+            macroType="Carbs"
+          />
+          <ProgressBar
+            backgroundColorStyled="#dd0aaf"
+            widthStyled={30}
+            macroType="Fat"
+          />
+          <ProgressBar
+            backgroundColorStyled="#3f20f1"
+            widthStyled={20}
+            macroType="Whey"
+          />
+          <ButtonContainer>
+            <Link to="/home">
+              <ButtonStyled>Testowy</ButtonStyled>
+            </Link>
+          </ButtonContainer>
+        </BoxStyled>
       </Modal>
     </div>
   );
