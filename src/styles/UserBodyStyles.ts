@@ -10,9 +10,9 @@ export const ContainerStyled = styled(Box).withConfig({
 })<ContainerStyledProps>`
   padding: 20px;
   height: 60vh;
-  display: flex;
+  /* display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-between; */
   transition: transform 0.2s ease;
   position: absolute;
   top: 0;
@@ -23,13 +23,13 @@ export const ContainerStyled = styled(Box).withConfig({
 export const HeaderStyled = styled(Typography).attrs({
   variant: "h5",
   textAlign: "center",
-  fontWeight: "bold",
-})`
-  margin-bottom: "28px";
-`;
+  mb: 5,
+  mt: 2,
+})``;
 
 export const TypographyStyled = styled(Typography).attrs({
   variant: "body2",
+  mb: 2,
 })`
   text-align: center;
 `;

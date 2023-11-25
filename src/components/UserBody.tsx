@@ -9,6 +9,7 @@ import {
   TypographyStyled,
 } from "../styles/UserBodyStyles";
 import { SummaryModal } from "./SummaryModal";
+import styled from "styled-components";
 
 type UserBodyProps = {
   changePage: number;
@@ -129,9 +130,16 @@ export const UserBody = ({ changePage, target, gender }: UserBodyProps) => {
     }));
   };
 
+  const FormStyled = styled.form`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+  `;
+
   return (
     <ContainerStyled changePage={changePage}>
-      <form onSubmit={handleAddInformation}>
+      <FormStyled onSubmit={handleAddInformation}>
         <Box>
           <HeaderStyled>
             We need information about your age, weight and height.
@@ -199,7 +207,7 @@ export const UserBody = ({ changePage, target, gender }: UserBodyProps) => {
             NEXT
           </Button>
         </Box>
-      </form>
+      </FormStyled>
       <SummaryModal />
     </ContainerStyled>
   );
