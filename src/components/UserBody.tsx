@@ -78,6 +78,13 @@ const calculateFat = (calories: number) => {
   return Math.trunc((calories * 0.3) / 9);
 };
 
+const FormStyled = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+`;
+
 export const UserBody = ({ changePage, target, gender }: UserBodyProps) => {
   const [form, setForm] = useState<DataFormTypes>({
     age: null,
@@ -85,6 +92,8 @@ export const UserBody = ({ changePage, target, gender }: UserBodyProps) => {
     height: null,
     isError: false,
   });
+
+  const [openModal, setOpenModal] = React.useState(false);
 
   const { age, weight, height } = form;
 
@@ -119,6 +128,7 @@ export const UserBody = ({ changePage, target, gender }: UserBodyProps) => {
       userFatNeeds: calculateFat(calories),
     };
     dispatch(addItem(information));
+    setOpenModal(true);
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -129,13 +139,6 @@ export const UserBody = ({ changePage, target, gender }: UserBodyProps) => {
       isError: false,
     }));
   };
-
-  const FormStyled = styled.form`
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-  `;
 
   return (
     <ContainerStyled changePage={changePage}>
@@ -197,18 +200,12 @@ export const UserBody = ({ changePage, target, gender }: UserBodyProps) => {
             personalized recommendations.
           </TypographyStyled>
 
-          <Button
-            // onClick={handleAddInformation}
-            variant="contained"
-            size="large"
-            fullWidth
-            type="submit"
-          >
+          <Button variant="contained" size="large" fullWidth type="submit">
             NEXT
           </Button>
         </Box>
       </FormStyled>
-      <SummaryModal />
+      {openModal && <SummaryModal openModal={openModal} />}
     </ContainerStyled>
   );
 };

@@ -42,16 +42,17 @@ const ButtonContainer = styled.div`
   margin-top: 24px;
 `;
 
-export const SummaryModal = () => {
-  const [openModal, setOpenModal] = React.useState(false);
-  const handleOpen = () => setOpenModal(true);
+type SummaryModalProps = {
+  openModal: boolean;
+};
 
+export const SummaryModal = ({ openModal }: SummaryModalProps) => {
   const user = useSelector(selectUser);
   const calories: number = user[0]?.userCaloriesNeeds;
 
   return (
     <div>
-      <Button onClick={handleOpen}>Open modal</Button>
+      {/* <Button onClick={handleOpen}>Open modal</Button> */}
       <Modal
         open={openModal}
         aria-labelledby="modal-modal-title"
