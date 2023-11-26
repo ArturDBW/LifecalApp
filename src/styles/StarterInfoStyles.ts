@@ -25,6 +25,7 @@ export const BottomFirtHalfSpanStyled = styled(Typography).attrs({
 
 export const BottomSecondHalfSpanStyled = styled(Typography).attrs({
   variant: "h4",
+  mb: 2,
 })`
   text-align: center;
 `;
@@ -37,6 +38,7 @@ export const HeaderStyled = styled(Typography).attrs({
 
 export const DescriptionStyled = styled(Typography).attrs({
   variant: "body1",
+  mt: 4,
 })`
   text-align: center;
 `;

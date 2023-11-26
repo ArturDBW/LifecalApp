@@ -1,6 +1,4 @@
 import { Box, Button, ToggleButton } from "@mui/material";
-import { useSelector } from "react-redux";
-import { selectUser } from "../slice/userSlice";
 import {
   ContainerStyled,
   HeaderStyled,
@@ -24,9 +22,6 @@ export const UserTarget = ({
   const handleChange = (_: React.ChangeEvent<{}>, newValue: string) => {
     setTarget(newValue);
   };
-
-  const user = useSelector(selectUser);
-  console.log(user);
 
   return (
     <ContainerStyled changePage={changePage}>

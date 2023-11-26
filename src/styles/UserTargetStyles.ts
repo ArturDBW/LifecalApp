@@ -22,6 +22,8 @@ export const ContainerStyled = styled(Box).withConfig({
 
 export const HeaderStyled = styled(Typography).attrs({
   variant: "h5",
+  mb: 5,
+  mt: 2,
 })`
   text-align: center;
   font-weight: bold;
@@ -29,6 +31,7 @@ export const HeaderStyled = styled(Typography).attrs({
 
 export const TypographyStyled = styled(Typography).attrs({
   variant: "body2",
+  mb: 2,
 })`
   text-align: center;
 `;
