@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Pierogi z mięsem",
+    "id": 1,
+    "calories": 205,
+    "carbs": 17,
+    "fat": 10,
+    "protein": 12
+  },
+  {
+    "name": "Jajecznica",
+    "id": 2,
+    "calories": 287,
+    "carbs": 1.8,
+    "fat": 21,
+    "protein": 21.1
+  },
+  {
+    "name": "Burher drwala",
+    "id": 3,
+    "calories": 915,
+    "carbs": 70,
+    "fat": 52,
+    "protein": 39
+  },
+  {
+    "name": "Kotlet schabowy",
+    "id": 4,
+    "calories": 253,
+    "carbs": 5.5,
+    "fat": 14.5,
+    "protein": 24.4
+  },
+  {
+    "name": "Lays paprykowe",
+    "id": 5,
+    "calories": 526,
+    "carbs": 52,
+    "fat": 32,
+    "protein": 5.9
+  },
+  {
+    "name": "Czekolada mleczna",
+    "id": 6,
+    "calories": 535,
+    "carbs": 59,
+    "fat": 30,
+    "protein": 8
+  }
+]
