@@ -18,13 +18,10 @@ import TableHead from "@mui/material/TableHead";
 import foodData from "../data.json";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  addCalorie,
   selectUser,
-  addProtein,
-  addFat,
-  addCarbonhydrate,
   addItemMeals,
   selectUserMeals,
+  calcCalories,
 } from "../slice/userSlice";
 
 interface TablePaginationActionsProps {
@@ -142,14 +139,9 @@ export default function CustomPaginationActionsTable() {
     fat: number;
   };
 
-  const handleCalcMacros =
-    ({ calories, proteins, carbs, fat }: handleCalcMacrosProps) =>
-    () => {
-      dispatch(addCalorie(calories));
-      dispatch(addProtein(proteins));
-      dispatch(addFat(fat));
-      dispatch(addCarbonhydrate(carbs));
-    };
+  const handleCalcMacros = (foodData) => {
+    dispatch(calcCalories(foodData));
+  };
 
   const test = (foodData) => {
     const newMeal = {
@@ -160,7 +152,6 @@ export default function CustomPaginationActionsTable() {
       mealFat: foodData.fat,
     };
     dispatch(addItemMeals(newMeal));
-    // console.log(userMeals);
   };
   return (
     <TableContainer component={Paper}>
@@ -185,18 +176,7 @@ export default function CustomPaginationActionsTable() {
           ).map((foodData) => (
             <TableRow key={foodData.id}>
               <TableCell sx={{ cursor: "pointer" }}>
-                <button
-                  onClick={() =>
-                    handleCalcMacros({
-                      calories: foodData.calories,
-                      proteins: foodData.protein,
-                      carbs: foodData.carbs,
-                      fat: foodData.fat,
-                    })()
-                  }
-                >
-                  +
-                </button>
+                <button onClick={() => handleCalcMacros(foodData)}>+</button>
                 <button onClick={() => test(foodData)}>-</button>
               </TableCell>
               <TableCell component="th" scope="row">
