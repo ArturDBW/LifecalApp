@@ -42,3 +42,4 @@ export const {
 } = userSlice.actions;
 
 export const selectUser = (state) => state.user.user;
+export const selectUserMeals = (state) => state.user.meals;

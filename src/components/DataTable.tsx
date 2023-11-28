@@ -24,6 +24,7 @@ import {
   addFat,
   addCarbonhydrate,
   addItemMeals,
+  selectUserMeals,
 } from "../slice/userSlice";
 
 interface TablePaginationActionsProps {
@@ -130,6 +131,8 @@ export default function CustomPaginationActionsTable() {
 
   const dispatch = useDispatch();
   const users = useSelector(selectUser);
+  const userMeals = useSelector(selectUserMeals);
+  console.log(userMeals);
   console.log(users);
 
   type handleCalcMacrosProps = {
@@ -148,15 +151,16 @@ export default function CustomPaginationActionsTable() {
       dispatch(addCarbonhydrate(carbs));
     };
 
-  const test = () => {
+  const test = (foodData) => {
     const newMeal = {
       name: foodData.name,
       mealCalories: foodData.calories,
       mealCarbonhydrates: foodData.carbs,
-      mealProteins: foodData.proteins,
+      mealProteins: foodData.protein,
       mealFat: foodData.fat,
     };
     dispatch(addItemMeals(newMeal));
+    // console.log(userMeals);
   };
   return (
     <TableContainer component={Paper}>
@@ -193,7 +197,7 @@ export default function CustomPaginationActionsTable() {
                 >
                   +
                 </button>
-                <button onClick={test}>-</button>
+                <button onClick={() => test(foodData)}>-</button>
               </TableCell>
               <TableCell component="th" scope="row">
                 {foodData.name}
