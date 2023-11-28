@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   user: [],
+  meals: [],
 };
 
 const userSlice = createSlice({
@@ -11,13 +12,33 @@ const userSlice = createSlice({
     addItem(state, action) {
       state.user.push(action.payload);
     },
+    addCalorie(state, action) {
+      state.user[0].currentCalories += action.payload;
+    },
+    addProtein(state, action) {
+      state.user[0].currentProteins += action.payload;
+    },
+    addFat(state, action) {
+      state.user[0].currentFat += action.payload;
+    },
+    addCarbonhydrate(state, action) {
+      state.user[0].currentCarbonhydrates += action.payload;
+    },
+    addItemMeals(state, action) {
+      state.meals.push(action.payload);
+    },
   },
 });
 
-export const { addItem } = userSlice.actions;
-
 export default userSlice.reducer;
 
-export const userData = (state) => state.user.user;
+export const {
+  addItem,
+  addCalorie,
+  addProtein,
+  addFat,
+  addCarbonhydrate,
+  addItemMeals,
+} = userSlice.actions;
 
 export const selectUser = (state) => state.user.user;

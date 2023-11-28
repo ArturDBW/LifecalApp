@@ -70,7 +70,7 @@ const calculateCarbohydrates = (calories: number) => {
   return Math.trunc((calories * 0.5) / 4);
 };
 
-const calculateWhey = (calories: number) => {
+const calculateProtein = (calories: number) => {
   return Math.trunc((calories * 0.2) / 4);
 };
 
@@ -117,6 +117,10 @@ export const UserBody = ({ changePage, target, gender }: UserBodyProps) => {
     } as CalculateCaloriesTypes);
 
     const information = {
+      currentCalories: 0,
+      currentCarbonhydrates: 0,
+      currentProteins: 0,
+      currentFat: 0,
       userAge: age,
       userWeight: weight,
       userHeight: height,
@@ -124,7 +128,7 @@ export const UserBody = ({ changePage, target, gender }: UserBodyProps) => {
       userGender: gender,
       userCaloriesNeeds: calories,
       userCarbohydratesNeeds: calculateCarbohydrates(calories),
-      userWheyNeeds: calculateWhey(calories),
+      userProteinNeeds: calculateProtein(calories),
       userFatNeeds: calculateFat(calories),
     };
     dispatch(addItem(information));

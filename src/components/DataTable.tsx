@@ -16,6 +16,15 @@ import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import LastPageIcon from "@mui/icons-material/LastPage";
 import TableHead from "@mui/material/TableHead";
 import foodData from "../data.json";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addCalorie,
+  selectUser,
+  addProtein,
+  addFat,
+  addCarbonhydrate,
+  addItemMeals,
+} from "../slice/userSlice";
 
 interface TablePaginationActionsProps {
   count: number;
@@ -119,6 +128,36 @@ export default function CustomPaginationActionsTable() {
     setPage(0);
   };
 
+  const dispatch = useDispatch();
+  const users = useSelector(selectUser);
+  console.log(users);
+
+  type handleCalcMacrosProps = {
+    calories: number;
+    proteins: number;
+    carbs: number;
+    fat: number;
+  };
+
+  const handleCalcMacros =
+    ({ calories, proteins, carbs, fat }: handleCalcMacrosProps) =>
+    () => {
+      dispatch(addCalorie(calories));
+      dispatch(addProtein(proteins));
+      dispatch(addFat(fat));
+      dispatch(addCarbonhydrate(carbs));
+    };
+
+  const test = () => {
+    const newMeal = {
+      name: foodData.name,
+      mealCalories: foodData.calories,
+      mealCarbonhydrates: foodData.carbs,
+      mealProteins: foodData.proteins,
+      mealFat: foodData.fat,
+    };
+    dispatch(addItemMeals(newMeal));
+  };
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
@@ -141,7 +180,21 @@ export default function CustomPaginationActionsTable() {
             : foodData
           ).map((foodData) => (
             <TableRow key={foodData.id}>
-              <TableCell>+</TableCell>
+              <TableCell sx={{ cursor: "pointer" }}>
+                <button
+                  onClick={() =>
+                    handleCalcMacros({
+                      calories: foodData.calories,
+                      proteins: foodData.protein,
+                      carbs: foodData.carbs,
+                      fat: foodData.fat,
+                    })()
+                  }
+                >
+                  +
+                </button>
+                <button onClick={test}>-</button>
+              </TableCell>
               <TableCell component="th" scope="row">
                 {foodData.name}
               </TableCell>
