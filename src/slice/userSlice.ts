@@ -15,10 +15,16 @@ const userSlice = createSlice({
     addItemMeals(state, action) {
       state.meals.push(action.payload);
     },
-    calcCalories(state, action) {
+    addCalorie(state, action) {
       state.user[0].currentCalories += action.payload;
+    },
+    addProtein(state, action) {
       state.user[0].currentProteins += action.payload;
+    },
+    addFat(state, action) {
       state.user[0].currentFat += action.payload;
+    },
+    addCarbonhydrate(state, action) {
       state.user[0].currentCarbonhydrates += action.payload;
     },
   },
@@ -26,7 +32,14 @@ const userSlice = createSlice({
 
 export default userSlice.reducer;
 
-export const { addItem, addItemMeals, calcCalories } = userSlice.actions;
+export const {
+  addItem,
+  addItemMeals,
+  addCalorie,
+  addProtein,
+  addFat,
+  addCarbonhydrate,
+} = userSlice.actions;
 
 export const selectUser = (state) => state.user.user;
 export const selectUserMeals = (state) => state.user.meals;

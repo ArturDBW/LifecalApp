@@ -21,7 +21,10 @@ import {
   selectUser,
   addItemMeals,
   selectUserMeals,
-  calcCalories,
+  addCalorie,
+  addProtein,
+  addFat,
+  addCarbonhydrate,
 } from "../slice/userSlice";
 
 interface TablePaginationActionsProps {
@@ -139,10 +142,14 @@ export default function CustomPaginationActionsTable() {
     fat: number;
   };
 
-  const handleCalcMacros = (foodData) => {
-    dispatch(calcCalories(foodData));
-  };
-
+  const handleCalcMacros =
+    ({ calories, proteins, carbs, fat }: handleCalcMacrosProps) =>
+    () => {
+      dispatch(addCalorie(calories));
+      dispatch(addProtein(proteins));
+      dispatch(addFat(fat));
+      dispatch(addCarbonhydrate(carbs));
+    };
   const test = (foodData) => {
     const newMeal = {
       name: foodData.name,
@@ -176,7 +183,18 @@ export default function CustomPaginationActionsTable() {
           ).map((foodData) => (
             <TableRow key={foodData.id}>
               <TableCell sx={{ cursor: "pointer" }}>
-                <button onClick={() => handleCalcMacros(foodData)}>+</button>
+                <button
+                  onClick={() =>
+                    handleCalcMacros({
+                      calories: foodData.calories,
+                      proteins: foodData.protein,
+                      carbs: foodData.carbs,
+                      fat: foodData.fat,
+                    })()
+                  }
+                >
+                  +
+                </button>
                 <button onClick={() => test(foodData)}>-</button>
               </TableCell>
               <TableCell component="th" scope="row">
