@@ -16,7 +16,6 @@ import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import LastPageIcon from "@mui/icons-material/LastPage";
 import TableHead from "@mui/material/TableHead";
 import foodData from "../data.json";
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectUser,
@@ -28,7 +27,7 @@ import {
   addCarbonhydrate,
 } from "../slice/userSlice";
 
-interface TablePaginationActionsProps {
+type TablePaginationActionsProps = {
   count: number;
   page: number;
   rowsPerPage: number;
@@ -36,7 +35,16 @@ interface TablePaginationActionsProps {
     event: React.MouseEvent<HTMLButtonElement>,
     newPage: number
   ) => void;
-}
+};
+
+type handleAddMealToDailyTableProps = {
+  name: string;
+  calories: number;
+  carbs: number;
+  protein: number;
+  fat: number;
+  type: string;
+};
 
 function TablePaginationActions(props: TablePaginationActionsProps) {
   const theme = useTheme();
@@ -108,7 +116,13 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
   );
 }
 
-export default function CustomPaginationActionsTable({ selectedRow }) {
+type CustomPaginationActionTable = {
+  selectedRow: string;
+};
+
+export default function CustomPaginationActionsTable({
+  selectedRow,
+}: CustomPaginationActionTable) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
@@ -151,7 +165,9 @@ export default function CustomPaginationActionsTable({ selectedRow }) {
       dispatch(addFat(fat));
       dispatch(addCarbonhydrate(carbs));
     };
-  const handleAddMealToDailyTable = (foodData) => {
+  const handleAddMealToDailyTable = (
+    foodData: handleAddMealToDailyTableProps
+  ) => {
     const newMeal = {
       name: foodData.name,
       mealCalories: foodData.calories,
@@ -163,92 +179,88 @@ export default function CustomPaginationActionsTable({ selectedRow }) {
     dispatch(addItemMeals(newMeal));
   };
   return (
-    <>
-      {/* <button onClick={() => setRodzaj("Śniadanie")}>Śniadanie</button>
-      <button onClick={() => setRodzaj("Obiad")}>Obiad</button> */}
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
-          <TableHead>
-            <TableRow>
-              <TableCell></TableCell>
-              <TableCell>Dessert (100g serving)</TableCell>
-              <TableCell align="right">Calories</TableCell>
-              <TableCell align="right">Fat&nbsp;(g)</TableCell>
-              <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-              <TableCell align="right">Protein&nbsp;(g)</TableCell>
+    <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
+        <TableHead>
+          <TableRow>
+            <TableCell></TableCell>
+            <TableCell>Dessert (100g serving)</TableCell>
+            <TableCell align="right">Calories</TableCell>
+            <TableCell align="right">Fat&nbsp;(g)</TableCell>
+            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
+            <TableCell align="right">Protein&nbsp;(g)</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {(rowsPerPage > 0
+            ? foodData.slice(
+                page * rowsPerPage,
+                page * rowsPerPage + rowsPerPage
+              )
+            : foodData
+          ).map((foodData) => (
+            <TableRow key={foodData.id}>
+              <TableCell sx={{ cursor: "pointer" }}>
+                <button
+                  onClick={() =>
+                    handleCalcMacros({
+                      calories: foodData.calories,
+                      proteins: foodData.protein,
+                      carbs: foodData.carbs,
+                      fat: foodData.fat,
+                    })()
+                  }
+                >
+                  +
+                </button>
+                <button onClick={() => handleAddMealToDailyTable(foodData)}>
+                  -
+                </button>
+              </TableCell>
+              <TableCell component="th" scope="row">
+                {foodData.name}
+              </TableCell>
+              <TableCell style={{ width: 160 }} align="right">
+                {foodData.calories}
+              </TableCell>
+              <TableCell style={{ width: 160 }} align="right">
+                {foodData.fat}
+              </TableCell>
+              <TableCell style={{ width: 160 }} align="right">
+                {foodData.carbs}
+              </TableCell>
+              <TableCell style={{ width: 160 }} align="right">
+                {foodData.protein}
+              </TableCell>
             </TableRow>
-          </TableHead>
-          <TableBody>
-            {(rowsPerPage > 0
-              ? foodData.slice(
-                  page * rowsPerPage,
-                  page * rowsPerPage + rowsPerPage
-                )
-              : foodData
-            ).map((foodData) => (
-              <TableRow key={foodData.id}>
-                <TableCell sx={{ cursor: "pointer" }}>
-                  <button
-                    onClick={() =>
-                      handleCalcMacros({
-                        calories: foodData.calories,
-                        proteins: foodData.protein,
-                        carbs: foodData.carbs,
-                        fat: foodData.fat,
-                      })()
-                    }
-                  >
-                    +
-                  </button>
-                  <button onClick={() => handleAddMealToDailyTable(foodData)}>
-                    -
-                  </button>
-                </TableCell>
-                <TableCell component="th" scope="row">
-                  {foodData.name}
-                </TableCell>
-                <TableCell style={{ width: 160 }} align="right">
-                  {foodData.calories}
-                </TableCell>
-                <TableCell style={{ width: 160 }} align="right">
-                  {foodData.fat}
-                </TableCell>
-                <TableCell style={{ width: 160 }} align="right">
-                  {foodData.carbs}
-                </TableCell>
-                <TableCell style={{ width: 160 }} align="right">
-                  {foodData.protein}
-                </TableCell>
-              </TableRow>
-            ))}
-            {emptyRows > 0 && (
-              <TableRow style={{ height: 53 * emptyRows }}>
-                <TableCell colSpan={6} />
-              </TableRow>
-            )}
-          </TableBody>
-          <TableFooter>
-            <TableRow>
-              <TablePagination
-                rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
-                colSpan={3}
-                count={foodData.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                SelectProps={{
-                  inputProps: {
-                    "aria-label": "rows per page",
-                  },
-                  native: true,
-                }}
-                onPageChange={handleChangePage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
-                ActionsComponent={TablePaginationActions}
-              />
+          ))}
+          {emptyRows > 0 && (
+            <TableRow style={{ height: 53 * emptyRows }}>
+              <TableCell colSpan={6} />
             </TableRow>
-          </TableFooter>
-        </Table>
-      </TableContainer>
-    </>
+          )}
+        </TableBody>
+        <TableFooter>
+          <TableRow>
+            <TablePagination
+              rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
+              colSpan={3}
+              count={foodData.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              SelectProps={{
+                inputProps: {
+                  "aria-label": "rows per page",
+                },
+                native: true,
+              }}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+              ActionsComponent={TablePaginationActions}
+            />
+          </TableRow>
+        </TableFooter>
+      </Table>
+    </TableContainer>
   );
 }

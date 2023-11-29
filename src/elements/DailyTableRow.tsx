@@ -12,7 +12,26 @@ const TableRowHistory = styled.div`
   grid-template-columns: repeat(6, 200px);
 `;
 
-export const DailtyTableRow = ({ rowName, setOpen, setSelectedRow }) => {
+type MealProps = {
+  type: string;
+  name: string;
+  mealCalories: number;
+  mealFat: number;
+  mealCarbonhydrates: number;
+  mealProteins: number;
+};
+
+type DailyTableRowProps = {
+  rowName: string;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setSelectedRow: React.Dispatch<React.SetStateAction<string>>;
+};
+
+export const DailtyTableRow = ({
+  rowName,
+  setOpen,
+  setSelectedRow,
+}: DailyTableRowProps) => {
   const onAddButonClick = () => {
     setSelectedRow(rowName);
     setOpen(true);
@@ -29,8 +48,8 @@ export const DailtyTableRow = ({ rowName, setOpen, setSelectedRow }) => {
       <div>0</div>
       <div>0</div>
       {userMeals
-        .filter((meal) => meal.type === rowName)
-        .map((meal, i) => (
+        .filter((meal: MealProps) => meal.type === rowName)
+        .map((meal: MealProps, i: number) => (
           <TableRowHistory key={i}>
             <div></div>
             <div>{meal.name}</div>

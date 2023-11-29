@@ -1,5 +1,4 @@
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import DataTable from "../components/DataTable";
 
@@ -15,12 +14,17 @@ const style = {
   p: 4,
 };
 
+type ProductsModalProps = {
+  open: boolean;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  selectedRow: string;
+};
+
 export default function ProductsModal({
   open,
   setOpen,
   selectedRow,
-  setSelectedRow,
-}) {
+}: ProductsModalProps) {
   const handleClose = () => setOpen(false);
 
   return (

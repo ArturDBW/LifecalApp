@@ -14,10 +14,6 @@ const HeaderTable = styled.div`
 `;
 
 export const DailyTable = () => {
-  const handleAddMealsClick = (rowName: string) => {
-    console.log(`Dodaj element do wiersza: ${rowName}`);
-  };
-
   const [open, setOpen] = React.useState(false);
   const [selectedRow, setSelectedRow] = useState("");
   console.log(selectedRow);
@@ -59,12 +55,7 @@ export const DailyTable = () => {
           setSelectedRow={setSelectedRow}
         />
       </GridContainer>
-      <ProductsModal
-        open={open}
-        setOpen={setOpen}
-        selectedRow={selectedRow}
-        setSelectedRow={setSelectedRow}
-      />
+      <ProductsModal open={open} setOpen={setOpen} selectedRow={selectedRow} />
     </>
   );
 };
