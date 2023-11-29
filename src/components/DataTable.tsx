@@ -108,7 +108,7 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
   );
 }
 
-export default function CustomPaginationActionsTable() {
+export default function CustomPaginationActionsTable({ selectedRow }) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
@@ -143,8 +143,6 @@ export default function CustomPaginationActionsTable() {
     fat: number;
   };
 
-  const [rodzaj, setRodzaj] = useState("");
-
   const handleCalcMacros =
     ({ calories, proteins, carbs, fat }: handleCalcMacrosProps) =>
     () => {
@@ -160,14 +158,14 @@ export default function CustomPaginationActionsTable() {
       mealCarbonhydrates: foodData.carbs,
       mealProteins: foodData.protein,
       mealFat: foodData.fat,
-      type: rodzaj,
+      type: selectedRow,
     };
     dispatch(addItemMeals(newMeal));
   };
   return (
     <>
-      <button onClick={() => setRodzaj("Śniadanie")}>Śniadanie</button>
-      <button onClick={() => setRodzaj("Obiad")}>Obiad</button>
+      {/* <button onClick={() => setRodzaj("Śniadanie")}>Śniadanie</button>
+      <button onClick={() => setRodzaj("Obiad")}>Obiad</button> */}
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
           <TableHead>

@@ -1,6 +1,5 @@
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { useState } from "react";
 import { selectUserMeals } from "../slice/userSlice";
 
 const TableRow = styled.div`
@@ -13,11 +12,10 @@ const TableRowHistory = styled.div`
   grid-template-columns: repeat(6, 200px);
 `;
 
-export const DailtyTableRow = ({ rowName, handleAddMealsClick }) => {
-  const [selectedRow] = useState(rowName);
-
+export const DailtyTableRow = ({ rowName, setOpen, setSelectedRow }) => {
   const onAddButonClick = () => {
-    handleAddMealsClick(rowName);
+    setSelectedRow(rowName);
+    setOpen(true);
   };
 
   const userMeals = useSelector(selectUserMeals);
@@ -31,7 +29,7 @@ export const DailtyTableRow = ({ rowName, handleAddMealsClick }) => {
       <div>0</div>
       <div>0</div>
       {userMeals
-        .filter((meal) => meal.type === selectedRow)
+        .filter((meal) => meal.type === rowName)
         .map((meal, i) => (
           <TableRowHistory key={i}>
             <div></div>

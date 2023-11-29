@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import DataTable from "../components/DataTable";
 import { DailyTable } from "../components/DailyTable";
 
 const Container = styled.div`
@@ -9,7 +8,6 @@ const Container = styled.div`
 export const Home = () => {
   return (
     <Container>
-      <DataTable />
       <DailyTable />
     </Container>
   );
