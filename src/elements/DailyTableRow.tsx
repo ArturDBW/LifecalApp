@@ -79,10 +79,29 @@ export const DailtyTableRow = ({
         </ButtonStyled>
       </ButtonBoxStyled>
       <SingleElementStyledSelf>{rowName}</SingleElementStyledSelf>
-      <SingleElementStyled>0</SingleElementStyled>
-      <SingleElementStyled>0</SingleElementStyled>
-      <SingleElementStyled>0</SingleElementStyled>
-      <SingleElementStyled>0</SingleElementStyled>
+      <SingleElementStyled>
+        {userMeals
+          .filter((meal: MealProps) => meal.type === rowName)
+          .reduce((sum: number, meal: MealProps) => sum + meal.mealCalories, 0)}
+      </SingleElementStyled>
+      <SingleElementStyled>
+        {userMeals
+          .filter((meal: MealProps) => meal.type === rowName)
+          .reduce((sum: number, meal: MealProps) => sum + meal.mealFat, 0)}
+      </SingleElementStyled>
+      <SingleElementStyled>
+        {userMeals
+          .filter((meal: MealProps) => meal.type === rowName)
+          .reduce(
+            (sum: number, meal: MealProps) => sum + meal.mealCarbonhydrates,
+            0
+          )}
+      </SingleElementStyled>
+      <SingleElementStyled>
+        {userMeals
+          .filter((meal: MealProps) => meal.type === rowName)
+          .reduce((sum: number, meal: MealProps) => sum + meal.mealProteins, 0)}
+      </SingleElementStyled>
       {userMeals
         .filter((meal: MealProps) => meal.type === rowName)
         .map((meal: MealProps, i: number) => (
