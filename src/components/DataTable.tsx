@@ -127,6 +127,14 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
   );
 }
 
+type FoodDataProps = {
+  name: string;
+  calories: number;
+  carbs: number;
+  protein: number;
+  fat: number;
+};
+
 export default function CustomPaginationActionsTable({
   selectedRow,
 }: CustomPaginationActionTable) {
@@ -155,18 +163,9 @@ export default function CustomPaginationActionsTable({
   const users = useSelector(selectUser);
   const userMeals = useSelector(selectUserMeals);
   console.log(userMeals);
-
-  const handleCalcMacros =
-    ({ calories, proteins, carbs, fat }: handleCalcMacrosProps) =>
-    () => {
-      dispatch(addCalorie(calories));
-      dispatch(addProtein(proteins));
-      dispatch(addFat(fat));
-      dispatch(addCarbonhydrate(carbs));
-    };
   console.log(users);
 
-  const handleAddMealToDailyTable = (
+  const addMealToDailyTableAndCalcMacros = (
     foodData: handleAddMealToDailyTableProps
   ) => {
     const newMeal = {
@@ -178,6 +177,35 @@ export default function CustomPaginationActionsTable({
       type: selectedRow,
     };
     dispatch(addItemMeals(newMeal));
+  };
+
+  const handleCalcMacros = ({
+    calories,
+    proteins,
+    carbs,
+    fat,
+  }: handleCalcMacrosProps) => {
+    dispatch(addCalorie(calories));
+    dispatch(addProtein(proteins));
+    dispatch(addFat(fat));
+    dispatch(addCarbonhydrate(carbs));
+  };
+
+  const handleCombinedFunction = (foodData: FoodDataProps) => {
+    addMealToDailyTableAndCalcMacros({
+      name: foodData.name,
+      calories: foodData.calories,
+      carbs: foodData.carbs,
+      protein: foodData.protein,
+      fat: foodData.fat,
+      type: selectedRow,
+    });
+    handleCalcMacros({
+      calories: foodData.calories,
+      proteins: foodData.protein,
+      carbs: foodData.carbs,
+      fat: foodData.fat,
+    });
   };
   return (
     <TableContainer component={Paper}>
@@ -202,21 +230,12 @@ export default function CustomPaginationActionsTable({
           ).map((foodData) => (
             <TableRow key={foodData.id}>
               <TableCell sx={{ cursor: "pointer" }}>
-                <button
-                  onClick={() =>
-                    handleCalcMacros({
-                      calories: foodData.calories,
-                      proteins: foodData.protein,
-                      carbs: foodData.carbs,
-                      fat: foodData.fat,
-                    })()
-                  }
-                >
+                <button onClick={() => handleCombinedFunction(foodData)}>
                   +
                 </button>
-                <button onClick={() => handleAddMealToDailyTable(foodData)}>
+                {/* <button onClick={() => handleAddMealToDailyTable(foodData)}>
                   -
-                </button>
+                </button> */}
               </TableCell>
               <TableCell component="th" scope="row">
                 {foodData.name}
