@@ -155,7 +155,6 @@ export default function CustomPaginationActionsTable({
   const users = useSelector(selectUser);
   const userMeals = useSelector(selectUserMeals);
   console.log(userMeals);
-  console.log(users);
 
   const handleCalcMacros =
     ({ calories, proteins, carbs, fat }: handleCalcMacrosProps) =>
@@ -165,6 +164,8 @@ export default function CustomPaginationActionsTable({
       dispatch(addFat(fat));
       dispatch(addCarbonhydrate(carbs));
     };
+  console.log(users);
+
   const handleAddMealToDailyTable = (
     foodData: handleAddMealToDailyTableProps
   ) => {

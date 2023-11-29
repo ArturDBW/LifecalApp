@@ -2,7 +2,9 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { selectUserMeals } from "../slice/userSlice";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import AddIcon from "@mui/icons-material/Add";
+import { useState } from "react";
 
 type MealProps = {
   type: string;
@@ -66,54 +68,83 @@ export const DailtyTableRow = ({
     setOpen(true);
   };
 
+  const [isOpenHistory, setIsOpenHistory] = useState(false);
+
   const userMeals = useSelector(selectUserMeals);
+
+  const userMealsFiltredByType = userMeals.filter(
+    (meal: MealProps) => meal.type === rowName
+  );
+
+  const formatNumber = (value: number) => {
+    return Number(value.toFixed(2)).toString();
+  };
 
   return (
     <TableRow>
       <ButtonBoxStyled>
+        {userMealsFiltredByType.length >= 1 && (
+          <ButtonStyled onClick={() => setIsOpenHistory(!isOpenHistory)}>
+            {isOpenHistory ? (
+              <ExpandLessIcon sx={{ fontSize: 20 }} />
+            ) : (
+              <ExpandMoreIcon sx={{ fontSize: 20 }} />
+            )}
+          </ButtonStyled>
+        )}
         <ButtonStyled onClick={onAddButonClick}>
-          <ExpandMoreIcon sx={{ fontSize: 20 }} />
-        </ButtonStyled>
-        <ButtonStyled>
           <AddIcon sx={{ fontSize: 20 }} />
         </ButtonStyled>
       </ButtonBoxStyled>
       <SingleElementStyledSelf>{rowName}</SingleElementStyledSelf>
       <SingleElementStyled>
-        {userMeals
-          .filter((meal: MealProps) => meal.type === rowName)
-          .reduce((sum: number, meal: MealProps) => sum + meal.mealCalories, 0)}
+        {formatNumber(
+          userMealsFiltredByType.reduce(
+            (sum: number, meal: MealProps) => sum + meal.mealCalories,
+            0
+          )
+        )}
       </SingleElementStyled>
       <SingleElementStyled>
-        {userMeals
-          .filter((meal: MealProps) => meal.type === rowName)
-          .reduce((sum: number, meal: MealProps) => sum + meal.mealFat, 0)}
+        {formatNumber(
+          userMealsFiltredByType.reduce(
+            (sum: number, meal: MealProps) => sum + meal.mealFat,
+            0
+          )
+        )}
       </SingleElementStyled>
       <SingleElementStyled>
-        {userMeals
-          .filter((meal: MealProps) => meal.type === rowName)
-          .reduce(
+        {formatNumber(
+          userMealsFiltredByType.reduce(
             (sum: number, meal: MealProps) => sum + meal.mealCarbonhydrates,
             0
-          )}
+          )
+        )}
       </SingleElementStyled>
       <SingleElementStyled>
-        {userMeals
-          .filter((meal: MealProps) => meal.type === rowName)
-          .reduce((sum: number, meal: MealProps) => sum + meal.mealProteins, 0)}
+        {formatNumber(
+          userMealsFiltredByType.reduce(
+            (sum: number, meal: MealProps) => sum + meal.mealProteins,
+            0
+          )
+        )}
       </SingleElementStyled>
-      {userMeals
-        .filter((meal: MealProps) => meal.type === rowName)
-        .map((meal: MealProps, i: number) => (
-          <TableRowHistory key={i}>
-            <SingleElementStyled>&nbsp;</SingleElementStyled>
-            <SingleElementStyledSelf>{meal.name}</SingleElementStyledSelf>
-            <SingleElementStyled>{meal.mealCalories}</SingleElementStyled>
-            <SingleElementStyled>{meal.mealFat}</SingleElementStyled>
-            <SingleElementStyled>{meal.mealCarbonhydrates}</SingleElementStyled>
-            <SingleElementStyled>{meal.mealProteins}</SingleElementStyled>
-          </TableRowHistory>
-        ))}
+      {isOpenHistory && (
+        <>
+          {userMealsFiltredByType.map((meal: MealProps, i: number) => (
+            <TableRowHistory key={i}>
+              <SingleElementStyled>&nbsp;</SingleElementStyled>
+              <SingleElementStyledSelf>{meal.name}</SingleElementStyledSelf>
+              <SingleElementStyled>{meal.mealCalories}</SingleElementStyled>
+              <SingleElementStyled>{meal.mealFat}</SingleElementStyled>
+              <SingleElementStyled>
+                {meal.mealCarbonhydrates}
+              </SingleElementStyled>
+              <SingleElementStyled>{meal.mealProteins}</SingleElementStyled>
+            </TableRowHistory>
+          ))}
+        </>
+      )}
     </TableRow>
   );
 };
