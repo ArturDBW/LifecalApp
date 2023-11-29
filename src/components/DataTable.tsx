@@ -46,6 +46,17 @@ type handleAddMealToDailyTableProps = {
   type: string;
 };
 
+type handleCalcMacrosProps = {
+  calories: number;
+  proteins: number;
+  carbs: number;
+  fat: number;
+};
+
+type CustomPaginationActionTable = {
+  selectedRow: string;
+};
+
 function TablePaginationActions(props: TablePaginationActionsProps) {
   const theme = useTheme();
   const { count, page, rowsPerPage, onPageChange } = props;
@@ -116,10 +127,6 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
   );
 }
 
-type CustomPaginationActionTable = {
-  selectedRow: string;
-};
-
 export default function CustomPaginationActionsTable({
   selectedRow,
 }: CustomPaginationActionTable) {
@@ -149,13 +156,6 @@ export default function CustomPaginationActionsTable({
   const userMeals = useSelector(selectUserMeals);
   console.log(userMeals);
   console.log(users);
-
-  type handleCalcMacrosProps = {
-    calories: number;
-    proteins: number;
-    carbs: number;
-    fat: number;
-  };
 
   const handleCalcMacros =
     ({ calories, proteins, carbs, fat }: handleCalcMacrosProps) =>
