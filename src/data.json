@@ -5,7 +5,8 @@
     "calories": 205,
     "carbs": 17,
     "fat": 10,
-    "protein": 12
+    "protein": 12,
+    "type": ""
   },
   {
     "name": "Jajecznica",
@@ -13,7 +14,8 @@
     "calories": 287,
     "carbs": 1.8,
     "fat": 21,
-    "protein": 21.1
+    "protein": 21.1,
+    "type": ""
   },
   {
     "name": "Burger drwala",
@@ -21,7 +23,8 @@
     "calories": 915,
     "carbs": 70,
     "fat": 52,
-    "protein": 39
+    "protein": 39,
+    "type": ""
   },
   {
     "name": "Kotlet schabowy",
@@ -29,7 +32,8 @@
     "calories": 253,
     "carbs": 5.5,
     "fat": 14.5,
-    "protein": 24.4
+    "protein": 24.4,
+    "type": ""
   },
   {
     "name": "Lays paprykowe",
@@ -37,7 +41,8 @@
     "calories": 526,
     "carbs": 52,
     "fat": 32,
-    "protein": 5.9
+    "protein": 5.9,
+    "type": ""
   },
   {
     "name": "Czekolada mleczna",
@@ -45,6 +50,7 @@
     "calories": 535,
     "carbs": 59,
     "fat": 30,
-    "protein": 8
+    "protein": 8,
+    "type": ""
   }
 ]

@@ -16,6 +16,7 @@ import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import LastPageIcon from "@mui/icons-material/LastPage";
 import TableHead from "@mui/material/TableHead";
 import foodData from "../data.json";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectUser,
@@ -142,6 +143,8 @@ export default function CustomPaginationActionsTable() {
     fat: number;
   };
 
+  const [rodzaj, setRodzaj] = useState("");
+
   const handleCalcMacros =
     ({ calories, proteins, carbs, fat }: handleCalcMacrosProps) =>
     () => {
@@ -150,97 +153,104 @@ export default function CustomPaginationActionsTable() {
       dispatch(addFat(fat));
       dispatch(addCarbonhydrate(carbs));
     };
-  const test = (foodData) => {
+  const handleAddMealToDailyTable = (foodData) => {
     const newMeal = {
       name: foodData.name,
       mealCalories: foodData.calories,
       mealCarbonhydrates: foodData.carbs,
       mealProteins: foodData.protein,
       mealFat: foodData.fat,
+      type: rodzaj,
     };
     dispatch(addItemMeals(newMeal));
   };
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
-        <TableHead>
-          <TableRow>
-            <TableCell></TableCell>
-            <TableCell>Dessert (100g serving)</TableCell>
-            <TableCell align="right">Calories</TableCell>
-            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {(rowsPerPage > 0
-            ? foodData.slice(
-                page * rowsPerPage,
-                page * rowsPerPage + rowsPerPage
-              )
-            : foodData
-          ).map((foodData) => (
-            <TableRow key={foodData.id}>
-              <TableCell sx={{ cursor: "pointer" }}>
-                <button
-                  onClick={() =>
-                    handleCalcMacros({
-                      calories: foodData.calories,
-                      proteins: foodData.protein,
-                      carbs: foodData.carbs,
-                      fat: foodData.fat,
-                    })()
-                  }
-                >
-                  +
-                </button>
-                <button onClick={() => test(foodData)}>-</button>
-              </TableCell>
-              <TableCell component="th" scope="row">
-                {foodData.name}
-              </TableCell>
-              <TableCell style={{ width: 160 }} align="right">
-                {foodData.calories}
-              </TableCell>
-              <TableCell style={{ width: 160 }} align="right">
-                {foodData.fat}
-              </TableCell>
-              <TableCell style={{ width: 160 }} align="right">
-                {foodData.carbs}
-              </TableCell>
-              <TableCell style={{ width: 160 }} align="right">
-                {foodData.protein}
-              </TableCell>
+    <>
+      <button onClick={() => setRodzaj("Śniadanie")}>Śniadanie</button>
+      <button onClick={() => setRodzaj("Obiad")}>Obiad</button>
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
+          <TableHead>
+            <TableRow>
+              <TableCell></TableCell>
+              <TableCell>Dessert (100g serving)</TableCell>
+              <TableCell align="right">Calories</TableCell>
+              <TableCell align="right">Fat&nbsp;(g)</TableCell>
+              <TableCell align="right">Carbs&nbsp;(g)</TableCell>
+              <TableCell align="right">Protein&nbsp;(g)</TableCell>
             </TableRow>
-          ))}
-          {emptyRows > 0 && (
-            <TableRow style={{ height: 53 * emptyRows }}>
-              <TableCell colSpan={6} />
+          </TableHead>
+          <TableBody>
+            {(rowsPerPage > 0
+              ? foodData.slice(
+                  page * rowsPerPage,
+                  page * rowsPerPage + rowsPerPage
+                )
+              : foodData
+            ).map((foodData) => (
+              <TableRow key={foodData.id}>
+                <TableCell sx={{ cursor: "pointer" }}>
+                  <button
+                    onClick={() =>
+                      handleCalcMacros({
+                        calories: foodData.calories,
+                        proteins: foodData.protein,
+                        carbs: foodData.carbs,
+                        fat: foodData.fat,
+                      })()
+                    }
+                  >
+                    +
+                  </button>
+                  <button onClick={() => handleAddMealToDailyTable(foodData)}>
+                    -
+                  </button>
+                </TableCell>
+                <TableCell component="th" scope="row">
+                  {foodData.name}
+                </TableCell>
+                <TableCell style={{ width: 160 }} align="right">
+                  {foodData.calories}
+                </TableCell>
+                <TableCell style={{ width: 160 }} align="right">
+                  {foodData.fat}
+                </TableCell>
+                <TableCell style={{ width: 160 }} align="right">
+                  {foodData.carbs}
+                </TableCell>
+                <TableCell style={{ width: 160 }} align="right">
+                  {foodData.protein}
+                </TableCell>
+              </TableRow>
+            ))}
+            {emptyRows > 0 && (
+              <TableRow style={{ height: 53 * emptyRows }}>
+                <TableCell colSpan={6} />
+              </TableRow>
+            )}
+          </TableBody>
+          <TableFooter>
+            <TableRow>
+              <TablePagination
+                rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
+                colSpan={3}
+                count={foodData.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                SelectProps={{
+                  inputProps: {
+                    "aria-label": "rows per page",
+                  },
+                  native: true,
+                }}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+                ActionsComponent={TablePaginationActions}
+              />
             </TableRow>
-          )}
-        </TableBody>
-        <TableFooter>
-          <TableRow>
-            <TablePagination
-              rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
-              colSpan={3}
-              count={foodData.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              SelectProps={{
-                inputProps: {
-                  "aria-label": "rows per page",
-                },
-                native: true,
-              }}
-              onPageChange={handleChangePage}
-              onRowsPerPageChange={handleChangeRowsPerPage}
-              ActionsComponent={TablePaginationActions}
-            />
-          </TableRow>
-        </TableFooter>
-      </Table>
-    </TableContainer>
+          </TableFooter>
+        </Table>
+      </TableContainer>
+    </>
   );
 }
