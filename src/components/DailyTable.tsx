@@ -6,7 +6,7 @@ import React, { useState } from "react";
 const GridContainerStyled = styled.div`
   display: grid;
   max-width: 1000px;
-  background-color: #f5f5f5;
+  background-color: #fff;
   font-size: 14px;
   border-radius: 5px;
 `;
