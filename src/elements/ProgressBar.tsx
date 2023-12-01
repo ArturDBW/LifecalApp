@@ -37,13 +37,19 @@ type ProgressBarProps = {
   macroType: string;
 };
 
+const Test = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
+
 export const ProgressBar = ({
   backgroundColorStyled,
   widthStyled,
   macroType,
 }: ProgressBarProps) => {
   return (
-    <>
+    <Test>
       <DataContainer>
         <span>{macroType}</span>
         <span>
@@ -57,6 +63,6 @@ export const ProgressBar = ({
           widthStyled={widthStyled}
         ></ProgressBarInside>
       </ProgressBarOutside>
-    </>
+    </Test>
   );
 };
