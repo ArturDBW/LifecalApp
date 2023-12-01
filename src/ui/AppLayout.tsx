@@ -7,13 +7,9 @@ const ContainerStyled = styled.div`
   width: 100vw;
   height: 100svh;
   background-color: #eee;
-  display: flex;
-  flex-direction: column;
 `;
 
-const MainStyled = styled.div`
-  flex: 1;
-`;
+const MainStyled = styled.div``;
 
 export const AppLayout = () => {
   return (
