@@ -6,10 +6,14 @@ import React, { useState } from "react";
 const GridContainerStyled = styled.div`
   background-color: #eee;
   font-size: 14px;
-  border-radius: 5px;
-  max-width: 640px;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
+  overflow-y: auto;
+  max-height: 544px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 `;
 
 export const DailyTable = () => {

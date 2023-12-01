@@ -29,7 +29,6 @@ const TableRow = styled.div`
   grid-template-rows: repeat(2, 1fr);
   padding: 16px;
   gap: 16px;
-  margin: 10px 0;
   background-color: #fff;
   border-radius: 10px;
 `;

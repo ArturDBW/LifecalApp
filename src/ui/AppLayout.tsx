@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Footer } from "../components/Footer";
+// import { Footer } from "../components/Footer";
 import Header from "../components/Header";
 import { Outlet } from "react-router-dom";
 
@@ -9,7 +9,9 @@ const ContainerStyled = styled.div`
   background-color: #eee;
 `;
 
-const MainStyled = styled.div``;
+const MainStyled = styled.div`
+  height: calc(100% - 80px);
+`;
 
 export const AppLayout = () => {
   return (
@@ -18,7 +20,6 @@ export const AppLayout = () => {
       <MainStyled>
         <Outlet />
       </MainStyled>
-      <Footer />
     </ContainerStyled>
   );
 };
