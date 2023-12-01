@@ -7,8 +7,6 @@ const FooterContainerStyled = styled.footer`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 24px;
-  position: sticky;
-  top: 100%;
 `;
 
 export const Footer = () => {
