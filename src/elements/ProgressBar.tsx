@@ -35,27 +35,42 @@ type ProgressBarProps = {
   backgroundColorStyled: string;
   widthStyled: number;
   macroType: string;
+  isGrammage: boolean;
 };
 
-const Test = styled.div`
+const Test = styled.div``;
+
+const SpanContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
+`;
+
+const GramsInformation = styled.span`
+  font-size: 14px;
+`;
+
+const PercentContainer = styled.span`
+  display: flex;
+  align-items: end;
 `;
 
 export const ProgressBar = ({
   backgroundColorStyled,
   widthStyled,
   macroType,
+  isGrammage,
 }: ProgressBarProps) => {
   return (
     <Test>
       <DataContainer>
-        <span>{macroType}</span>
-        <span>
+        <SpanContainer>
+          <span>{macroType}</span>
+          {isGrammage && <GramsInformation>12.6 g / 33 g</GramsInformation>}
+        </SpanContainer>
+        <PercentContainer>
           {widthStyled}
           {macroType === "Calories" ? " kcal" : "%"}
-        </span>
+        </PercentContainer>
       </DataContainer>
       <ProgressBarOutside>
         <ProgressBarInside

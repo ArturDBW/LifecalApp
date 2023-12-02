@@ -22,40 +22,74 @@ type DailyTableRowProps = {
 };
 
 const TableRow = styled.div`
+  width: 100%;
   display: grid;
-  grid-template-columns: 100px 200px repeat(4, 1fr);
-  justify-items: end;
   align-items: center;
-  border-top: 1px solid gray;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(2, 1fr);
+  padding: 16px;
+  gap: 16px;
+  background-color: #fff;
+  border-radius: 10px;
 `;
 
 const TableRowHistory = styled.div`
-  display: grid;
   width: 100%;
-  grid-template-columns: 100px 200px repeat(4, 1fr);
-  justify-items: end;
-  align-items: center;
-  border-top: 1px solid gray;
+  display: grid;
+  grid-template-columns: 1fr repeat(4, 50px);
+  grid-template-rows: 1fr;
   grid-column: 1/-1;
+  gap: 0 16px;
 `;
 
 const SingleElementStyled = styled.div`
-  padding: 16px;
+  justify-self: end;
 `;
 
 const SingleElementStyledSelf = styled.div`
-  padding: 16px;
   justify-self: start;
 `;
-const ButtonBoxStyled = styled.div`
-  padding: 16px;
+
+const HeaderSingleElementStyledSelf = styled.div`
+  justify-self: start;
+  font-weight: 700;
+`;
+
+const HeaderSingleElementStyled = styled.div`
+  justify-self: end;
+  font-weight: 700;
+`;
+const TitleBoxStyled = styled.div`
   display: flex;
+  align-items: center;
+  font-weight: 700;
+  font-size: 18px;
 `;
 const ButtonStyled = styled.button`
   border: none;
   outline: none;
   background-color: transparent;
   cursor: pointer;
+`;
+
+const MacrosBoxStyled = styled.div`
+  display: flex;
+`;
+
+const MacrosElementStyled = styled.div`
+  flex-grow: 1;
+  max-width: 50px;
+`;
+
+const AddButtonStyled = styled.div`
+  justify-self: end;
+  align-items: center;
+`;
+
+const CaloriesElementStyled = styled.div`
+  justify-self: end;
+  font-weight: 700;
+  font-size: 18px;
 `;
 
 export const DailtyTableRow = ({
@@ -82,7 +116,8 @@ export const DailtyTableRow = ({
 
   return (
     <TableRow>
-      <ButtonBoxStyled>
+      <TitleBoxStyled>
+        <SingleElementStyledSelf>{rowName}</SingleElementStyledSelf>
         {userMealsFiltredByType.length >= 1 && (
           <ButtonStyled onClick={() => setIsOpenHistory(!isOpenHistory)}>
             {isOpenHistory ? (
@@ -92,55 +127,72 @@ export const DailtyTableRow = ({
             )}
           </ButtonStyled>
         )}
-        <ButtonStyled onClick={onAddButonClick}>
-          <AddIcon sx={{ fontSize: 20 }} />
-        </ButtonStyled>
-      </ButtonBoxStyled>
-      <SingleElementStyledSelf>{rowName}</SingleElementStyledSelf>
-      <SingleElementStyled>
+      </TitleBoxStyled>
+
+      <CaloriesElementStyled>
         {formatNumber(
           userMealsFiltredByType.reduce(
             (sum: number, meal: MealProps) => sum + meal.mealCalories,
             0
           )
         )}
-      </SingleElementStyled>
-      <SingleElementStyled>
-        {formatNumber(
-          userMealsFiltredByType.reduce(
-            (sum: number, meal: MealProps) => sum + meal.mealFat,
-            0
-          )
-        )}
-      </SingleElementStyled>
-      <SingleElementStyled>
-        {formatNumber(
-          userMealsFiltredByType.reduce(
-            (sum: number, meal: MealProps) => sum + meal.mealCarbonhydrates,
-            0
-          )
-        )}
-      </SingleElementStyled>
-      <SingleElementStyled>
-        {formatNumber(
-          userMealsFiltredByType.reduce(
-            (sum: number, meal: MealProps) => sum + meal.mealProteins,
-            0
-          )
-        )}
-      </SingleElementStyled>
+        &nbsp;kcal
+      </CaloriesElementStyled>
+      <MacrosBoxStyled>
+        <MacrosElementStyled>
+          {formatNumber(
+            userMealsFiltredByType.reduce(
+              (sum: number, meal: MealProps) => sum + meal.mealFat,
+              0
+            )
+          )}
+          g
+        </MacrosElementStyled>
+
+        <MacrosElementStyled>
+          {formatNumber(
+            userMealsFiltredByType.reduce(
+              (sum: number, meal: MealProps) => sum + meal.mealCarbonhydrates,
+              0
+            )
+          )}
+          g
+        </MacrosElementStyled>
+        <MacrosElementStyled>
+          {formatNumber(
+            userMealsFiltredByType.reduce(
+              (sum: number, meal: MealProps) => sum + meal.mealProteins,
+              0
+            )
+          )}
+          g
+        </MacrosElementStyled>
+      </MacrosBoxStyled>
+      <AddButtonStyled onClick={onAddButonClick}>
+        <AddIcon sx={{ fontSize: 20 }} />
+      </AddButtonStyled>
       {isOpenHistory && (
         <>
+          <TableRowHistory>
+            <HeaderSingleElementStyledSelf>Meals</HeaderSingleElementStyledSelf>
+            <HeaderSingleElementStyled>Calories</HeaderSingleElementStyled>
+            <HeaderSingleElementStyled>Fat</HeaderSingleElementStyled>
+            <HeaderSingleElementStyled>Carbs</HeaderSingleElementStyled>
+            <HeaderSingleElementStyled>Proteins</HeaderSingleElementStyled>
+          </TableRowHistory>
           {userMealsFiltredByType.map((meal: MealProps, i: number) => (
             <TableRowHistory key={i}>
-              <SingleElementStyled>&nbsp;</SingleElementStyled>
               <SingleElementStyledSelf>{meal.name}</SingleElementStyledSelf>
-              <SingleElementStyled>{meal.mealCalories}</SingleElementStyled>
-              <SingleElementStyled>{meal.mealFat}</SingleElementStyled>
               <SingleElementStyled>
-                {meal.mealCarbonhydrates}
+                {meal.mealCalories}&nbsp;kcal
               </SingleElementStyled>
-              <SingleElementStyled>{meal.mealProteins}</SingleElementStyled>
+              <SingleElementStyled>{meal.mealFat}&nbsp;g</SingleElementStyled>
+              <SingleElementStyled>
+                {meal.mealCarbonhydrates}&nbsp;g
+              </SingleElementStyled>
+              <SingleElementStyled>
+                {meal.mealProteins}&nbsp;g
+              </SingleElementStyled>
             </TableRowHistory>
           ))}
         </>
