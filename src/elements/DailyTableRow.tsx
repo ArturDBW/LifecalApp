@@ -81,11 +81,6 @@ const MacrosElementStyled = styled.div`
   max-width: 50px;
 `;
 
-const SingleMacrosBoxStyled = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
 const AddButtonStyled = styled.div`
   justify-self: end;
   align-items: center;
