@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { DailyTable } from "../components/DailyTable";
 import { CurrentData } from "../components/CurrentData";
 import { AddMeals } from "../components/AddMeals";
+import { useState } from "react";
+import foodData from "../data.json";
 
 const Container = styled.div`
   max-width: 1280px;
@@ -15,12 +17,23 @@ const Container = styled.div`
   height: 100%;
 `;
 
+interface Product {
+  name: string;
+  id: number;
+  calories: number;
+  fat: number;
+  carbs: number;
+  protein: number;
+}
+
 export const Home = () => {
+  const [tableData, setTableData] = useState<Product[]>(foodData);
+
   return (
     <Container>
       <CurrentData />
-      <DailyTable />
-      <AddMeals />
+      <DailyTable tableData={tableData} setTableData={setTableData} />
+      <AddMeals tableData={tableData} setTableData={setTableData} />
     </Container>
   );
   1;

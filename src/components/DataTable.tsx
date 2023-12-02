@@ -53,8 +53,19 @@ type handleCalcMacrosProps = {
   fat: number;
 };
 
+interface Product {
+  name: string;
+  id: number;
+  calories: number;
+  fat: number;
+  carbs: number;
+  protein: number;
+}
+
 type CustomPaginationActionTable = {
   selectedRow: string;
+  tableData: Product[];
+  setTableData: React.Dispatch<React.SetStateAction<Product[]>>;
 };
 
 function TablePaginationActions(props: TablePaginationActionsProps) {
@@ -137,6 +148,7 @@ type FoodDataProps = {
 
 export default function CustomPaginationActionsTable({
   selectedRow,
+  tableData,
 }: CustomPaginationActionTable) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -222,11 +234,11 @@ export default function CustomPaginationActionsTable({
         </TableHead>
         <TableBody>
           {(rowsPerPage > 0
-            ? foodData.slice(
+            ? tableData.slice(
                 page * rowsPerPage,
                 page * rowsPerPage + rowsPerPage
               )
-            : foodData
+            : tableData
           ).map((foodData) => (
             <TableRow key={foodData.id}>
               <TableCell sx={{ cursor: "pointer" }}>

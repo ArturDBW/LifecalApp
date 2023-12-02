@@ -14,13 +14,26 @@ const style = {
   p: 4,
 };
 
+interface Product {
+  name: string;
+  id: number;
+  calories: number;
+  fat: number;
+  carbs: number;
+  protein: number;
+}
+
 type ProductsModalProps = {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   selectedRow: string;
+  tableData: Product[];
+  setTableData: React.Dispatch<React.SetStateAction<Product[]>>;
 };
 
 export default function ProductsModal({
+  tableData,
+  setTableData,
   open,
   setOpen,
   selectedRow,
@@ -36,7 +49,11 @@ export default function ProductsModal({
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <DataTable selectedRow={selectedRow} />
+          <DataTable
+            selectedRow={selectedRow}
+            tableData={tableData}
+            setTableData={setTableData}
+          />
         </Box>
       </Modal>
     </div>

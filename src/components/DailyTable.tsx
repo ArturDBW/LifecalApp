@@ -16,7 +16,21 @@ const GridContainerStyled = styled.div`
   gap: 16px;
 `;
 
-export const DailyTable = () => {
+interface Product {
+  name: string;
+  id: number;
+  calories: number;
+  fat: number;
+  carbs: number;
+  protein: number;
+}
+
+type DailyTableProps = {
+  tableData: Product[];
+  setTableData: React.Dispatch<React.SetStateAction<Product[]>>;
+};
+
+export const DailyTable = ({ tableData, setTableData }: DailyTableProps) => {
   const [open, setOpen] = React.useState(false);
   const [selectedRow, setSelectedRow] = useState("");
   console.log(selectedRow);
@@ -50,7 +64,13 @@ export const DailyTable = () => {
           setSelectedRow={setSelectedRow}
         />
       </GridContainerStyled>
-      <ProductsModal open={open} setOpen={setOpen} selectedRow={selectedRow} />
+      <ProductsModal
+        open={open}
+        setOpen={setOpen}
+        selectedRow={selectedRow}
+        tableData={tableData}
+        setTableData={setTableData}
+      />
     </>
   );
 };

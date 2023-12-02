@@ -1,8 +1,6 @@
 import { Button, TextField } from "@mui/material";
 import styled from "styled-components";
-import { useState, useEffect } from "react";
-import axios from "axios";
-import data from "../data.json";
+import { useState } from "react";
 
 const FormContainerStyled = styled.form`
   display: grid;
@@ -20,12 +18,52 @@ const ButtonStyled = styled(Button)`
   grid-column: 1/-1;
 `;
 
-export const AddMealsForm = () => {
+interface Product {
+  name: string;
+  id: number;
+  calories: number;
+  fat: number;
+  carbs: number;
+  protein: number;
+}
+
+type AddMealsFormProps = {
+  tableData: Product[];
+  setTableData: React.Dispatch<React.SetStateAction<Product[]>>;
+};
+
+export const AddMealsForm = ({
+  tableData,
+  setTableData,
+}: AddMealsFormProps) => {
   const [nameValue, setNameValue] = useState("");
   const [caloriesValue, setCaloriesValue] = useState("");
   const [fatValue, setFatValue] = useState("");
   const [carbsValue, setCarbsValue] = useState("");
   const [proteinValue, setProteinValue] = useState("");
+
+  const handleAddProduct = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    const newProduct = {
+      name: nameValue,
+      id: tableData.length + 1,
+      calories: parseFloat(caloriesValue),
+      fat: parseFloat(fatValue),
+      carbs: parseFloat(carbsValue),
+      protein: parseFloat(proteinValue),
+    };
+
+    const updatedTableData = [...tableData, newProduct];
+
+    setTableData(updatedTableData);
+
+    setNameValue("");
+    setCaloriesValue("");
+    setFatValue("");
+    setCarbsValue("");
+    setProteinValue("");
+  };
 
   return (
     <FormContainerStyled>
@@ -72,7 +110,13 @@ export const AddMealsForm = () => {
         fullWidth
       />
 
-      <ButtonStyled variant="contained" type="submit" fullWidth size="large">
+      <ButtonStyled
+        variant="contained"
+        type="submit"
+        fullWidth
+        size="large"
+        onClick={handleAddProduct}
+      >
         Add product
       </ButtonStyled>
     </FormContainerStyled>

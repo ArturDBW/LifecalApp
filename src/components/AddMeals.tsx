@@ -17,7 +17,7 @@ const InfoSpanStyled = styled.span`
   font-size: 40px;
 `;
 
-export const AddMeals = () => {
+export const AddMeals = ({ tableData, setTableData }) => {
   return (
     <ContainerStyled>
       <InfoBoxStyled>
@@ -25,7 +25,7 @@ export const AddMeals = () => {
           If your product is not on the list, add it yourself.
         </InfoSpanStyled>
       </InfoBoxStyled>
-      <AddMealsForm />
+      <AddMealsForm tableData={tableData} setTableData={setTableData} />
     </ContainerStyled>
   );
 };
