@@ -155,7 +155,7 @@ export default function CustomPaginationActionsTable({
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - foodData.length) : 0;
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - tableData.length) : 0;
 
   const handleChangePage = (
     _: React.MouseEvent<HTMLButtonElement> | null,
@@ -219,6 +219,7 @@ export default function CustomPaginationActionsTable({
       fat: foodData.fat,
     });
   };
+
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
@@ -245,9 +246,6 @@ export default function CustomPaginationActionsTable({
                 <button onClick={() => handleCombinedFunction(foodData)}>
                   +
                 </button>
-                {/* <button onClick={() => handleAddMealToDailyTable(foodData)}>
-                  -
-                </button> */}
               </TableCell>
               <TableCell component="th" scope="row">
                 {foodData.name}
@@ -277,7 +275,7 @@ export default function CustomPaginationActionsTable({
             <TablePagination
               rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
               colSpan={3}
-              count={foodData.length}
+              count={tableData.length}
               rowsPerPage={rowsPerPage}
               page={page}
               SelectProps={{
