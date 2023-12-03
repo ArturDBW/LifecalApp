@@ -56,7 +56,7 @@ export const CurrentData = () => {
           isGrammage={true}
         />
         <ProgressBar
-          backgroundColorStyled="#f3550c"
+          backgroundColorStyled="#ee5c19"
           widthStyled={85}
           macroType="Carbs"
           isGrammage={true}
