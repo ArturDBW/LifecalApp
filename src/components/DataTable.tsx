@@ -1,22 +1,22 @@
 import * as React from "react";
 import { useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
-import Table from "@mui/material/Table";
+import { Paper } from "@mui/material";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableFooter from "@mui/material/TableFooter";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
 import IconButton from "@mui/material/IconButton";
 import FirstPageIcon from "@mui/icons-material/FirstPage";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import LastPageIcon from "@mui/icons-material/LastPage";
 import TableHead from "@mui/material/TableHead";
-import foodData from "../data.json";
 import { useDispatch, useSelector } from "react-redux";
+import AddIcon from "@mui/icons-material/Add";
+
 import {
   selectUser,
   addItemMeals,
@@ -26,7 +26,7 @@ import {
   addFat,
   addCarbonhydrate,
 } from "../slice/userSlice";
-
+import styled from "styled-components";
 type TablePaginationActionsProps = {
   count: number;
   page: number;
@@ -53,9 +53,40 @@ type handleCalcMacrosProps = {
   fat: number;
 };
 
+interface Product {
+  name: string;
+  id: number;
+  calories: number;
+  fat: number;
+  carbs: number;
+  protein: number;
+}
+
 type CustomPaginationActionTable = {
   selectedRow: string;
+  tableData: Product[];
+  setTableData: React.Dispatch<React.SetStateAction<Product[]>>;
 };
+
+const TableColumnName = styled(TableCell)`
+  width: 50%;
+`;
+
+const TableContainerStyled = styled(Box)``;
+
+const TableStyled = styled.div``;
+
+const ButtonStyled = styled.button`
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: 0.2s all;
+  &:hover {
+    transform: scale(125%);
+  }
+`;
 
 function TablePaginationActions(props: TablePaginationActionsProps) {
   const theme = useTheme();
@@ -137,13 +168,14 @@ type FoodDataProps = {
 
 export default function CustomPaginationActionsTable({
   selectedRow,
+  tableData,
 }: CustomPaginationActionTable) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - foodData.length) : 0;
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - tableData.length) : 0;
 
   const handleChangePage = (
     _: React.MouseEvent<HTMLButtonElement> | null,
@@ -207,13 +239,14 @@ export default function CustomPaginationActionsTable({
       fat: foodData.fat,
     });
   };
+
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
+    <TableContainerStyled component={Paper}>
+      <TableStyled aria-label="custom pagination table">
         <TableHead>
           <TableRow>
             <TableCell></TableCell>
-            <TableCell>Dessert (100g serving)</TableCell>
+            <TableCell>Dessert</TableCell>
             <TableCell align="right">Calories</TableCell>
             <TableCell align="right">Fat&nbsp;(g)</TableCell>
             <TableCell align="right">Carbs&nbsp;(g)</TableCell>
@@ -222,24 +255,21 @@ export default function CustomPaginationActionsTable({
         </TableHead>
         <TableBody>
           {(rowsPerPage > 0
-            ? foodData.slice(
+            ? tableData.slice(
                 page * rowsPerPage,
                 page * rowsPerPage + rowsPerPage
               )
-            : foodData
+            : tableData
           ).map((foodData) => (
             <TableRow key={foodData.id}>
-              <TableCell sx={{ cursor: "pointer" }}>
-                <button onClick={() => handleCombinedFunction(foodData)}>
-                  +
-                </button>
-                {/* <button onClick={() => handleAddMealToDailyTable(foodData)}>
-                  -
-                </button> */}
+              <TableCell sx={{ cursor: "pointer", width: 50 }}>
+                <ButtonStyled onClick={() => handleCombinedFunction(foodData)}>
+                  <AddIcon />
+                </ButtonStyled>
               </TableCell>
-              <TableCell component="th" scope="row">
+              <TableColumnName component="th" scope="row">
                 {foodData.name}
-              </TableCell>
+              </TableColumnName>
               <TableCell style={{ width: 160 }} align="right">
                 {foodData.calories}
               </TableCell>
@@ -265,7 +295,7 @@ export default function CustomPaginationActionsTable({
             <TablePagination
               rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
               colSpan={3}
-              count={foodData.length}
+              count={tableData.length}
               rowsPerPage={rowsPerPage}
               page={page}
               SelectProps={{
@@ -280,7 +310,7 @@ export default function CustomPaginationActionsTable({
             />
           </TableRow>
         </TableFooter>
-      </Table>
-    </TableContainer>
+      </TableStyled>
+    </TableContainerStyled>
   );
 }

@@ -7,6 +7,10 @@ const ContainerStyled = styled.div`
   width: 100vw;
   height: 100svh;
   background-color: #eee;
+
+  @media (max-width: 768px) {
+    height: auto;
+  }
 `;
 
 const MainStyled = styled.div`
