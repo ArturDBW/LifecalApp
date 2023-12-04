@@ -35,6 +35,8 @@ type ProgressBarProps = {
   widthStyled: number;
   macroType: string;
   isGrammage: boolean;
+  currentMacro?: number;
+  targetMacro?: number;
 };
 
 const Test = styled.div``;
@@ -58,17 +60,23 @@ export const ProgressBar = ({
   widthStyled,
   macroType,
   isGrammage,
+  currentMacro,
+  targetMacro,
 }: ProgressBarProps) => {
   return (
     <Test>
       <DataContainer>
         <SpanContainer>
           <span>{macroType}</span>
-          {isGrammage && <GramsInformation>12.6 g / 33 g</GramsInformation>}
+          {isGrammage && (
+            <GramsInformation>
+              {currentMacro} g / {targetMacro} g
+            </GramsInformation>
+          )}
         </SpanContainer>
         <PercentContainer>
           {widthStyled}
-          {macroType === "Calories" ? " kcal" : "%"}
+          {macroType === "Calories" && isGrammage === false ? " kcal" : "%"}
         </PercentContainer>
       </DataContainer>
       <ProgressBarOutside>

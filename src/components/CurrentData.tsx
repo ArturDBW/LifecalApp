@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { ProgressBar } from "../elements/ProgressBar";
+import { useSelector } from "react-redux";
+import { selectUser } from "../slice/userSlice";
 
 const ContainerStyled = styled.div`
   background-color: #fff;
@@ -40,40 +42,73 @@ const ProgresBarBoxStyled = styled.div`
 `;
 
 export const CurrentData = () => {
+  const userData = useSelector(selectUser);
+
   return (
     <ContainerStyled>
       <BasicInfoBoxStyled>
         <DataStyled>Monday, 24th January</DataStyled>
         <CaloriesStyled>
           <CaloriesInfoStyled>
-            1654<SecondCaloriesInfoStyled>kcal</SecondCaloriesInfoStyled>
+            {userData[0].currentCalories}
+            <SecondCaloriesInfoStyled>kcal</SecondCaloriesInfoStyled>
           </CaloriesInfoStyled>
         </CaloriesStyled>
       </BasicInfoBoxStyled>
       <ProgresBarBoxStyled>
         <ProgressBar
           backgroundColorStyled="linear-gradient(to right, #ff7e5f, #feb47b)"
-          widthStyled={15}
+          widthStyled={Number(
+            (
+              (userData[0].currentCalories / userData[0].userCaloriesNeeds) *
+              100
+            ).toFixed(2)
+          )}
           macroType="Calories"
           isGrammage={true}
+          currentMacro={userData[0].currentCalories}
+          targetMacro={userData[0].userCaloriesNeeds}
         />
         <ProgressBar
           backgroundColorStyled="linear-gradient(to right, #09f7ed, #30bdba)"
-          widthStyled={45}
+          widthStyled={Number(
+            ((userData[0].currentFat / userData[0].userFatNeeds) * 100).toFixed(
+              2
+            )
+          )}
           macroType="Fat"
           isGrammage={true}
+          currentMacro={userData[0].currentFat}
+          targetMacro={userData[0].userFatNeeds}
         />
         <ProgressBar
           backgroundColorStyled="linear-gradient(to right, #ac72b1, #4d1749)"
-          widthStyled={85}
+          widthStyled={Number(
+            (
+              (userData[0].currentCarbonhydrates /
+                userData[0].userCarbohydratesNeeds) *
+              100
+            ).toFixed(2)
+          )}
           macroType="Carbs"
           isGrammage={true}
+          currentMacro={
+            Math.round(userData[0].currentCarbonhydrates * 100) / 100
+          }
+          targetMacro={userData[0].userCarbohydratesNeeds}
         />
         <ProgressBar
           backgroundColorStyled="linear-gradient(to right, #c747c7, #f911d8)"
-          widthStyled={30}
+          widthStyled={Number(
+            (
+              (userData[0].currentProteins / userData[0].userProteinNeeds) *
+              100
+            ).toFixed(2)
+          )}
           macroType="Protein"
           isGrammage={true}
+          currentMacro={Math.round(userData[0].currentProteins * 100) / 100}
+          targetMacro={userData[0].userProteinNeeds}
         />
       </ProgresBarBoxStyled>
     </ContainerStyled>
