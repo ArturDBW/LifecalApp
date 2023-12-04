@@ -12,7 +12,7 @@ const BoxStyled = styled(Box)`
   left: 50%;
   transform: translate(-50%, -50%);
   min-width: 340px;
-  max-width: 500px;
+  max-width: 440px;
   padding: 24px;
   background-color: white;
   border-radius: 10px;
@@ -91,7 +91,7 @@ export const SummaryModal = ({ openModal }: SummaryModalProps) => {
           />
           <ButtonContainer>
             <Link to="/home">
-              <ButtonStyled>Testowy</ButtonStyled>
+              <ButtonStyled>GET STARTED</ButtonStyled>
             </Link>
           </ButtonContainer>
         </BoxStyled>
