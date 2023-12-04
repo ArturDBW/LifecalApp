@@ -86,7 +86,7 @@ export const SummaryModal = ({ openModal }: SummaryModalProps) => {
           <ProgressBar
             backgroundColorStyled="#3f20f1"
             widthStyled={20}
-            macroType="Whey"
+            macroType="Protein"
             isGrammage={false}
           />
           <ButtonContainer>

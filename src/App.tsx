@@ -2,6 +2,15 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { GetBasicInformation } from "./pages/GetBasicInformation";
 import { AppLayout } from "./ui/AppLayout";
 import { Home } from "./pages/Home";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: `#43a047`,
+    },
+  },
+});
 
 const router = createBrowserRouter([
   {
@@ -20,5 +29,9 @@ const router = createBrowserRouter([
 ]);
 
 export const App = () => {
-  return <RouterProvider router={router} />;
+  return (
+    <ThemeProvider theme={theme}>
+      <RouterProvider router={router} />
+    </ThemeProvider>
+  );
 };
