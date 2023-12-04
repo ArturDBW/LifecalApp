@@ -25,6 +25,7 @@ export const ImageContainer = styled(Box)`
   background-position: center;
   position: absolute;
   top: 0;
+  padding: 10px;
 `;
 
 export const PaperStyled = styled(Paper)`

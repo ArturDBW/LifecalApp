@@ -33,6 +33,10 @@ const ProgresBarBoxStyled = styled.div`
   display: flex;
   flex-direction: column;
   gap: 40px 0;
+
+  @media (max-width: 768px) {
+    gap: 8px 0;
+  }
 `;
 
 export const CurrentData = () => {

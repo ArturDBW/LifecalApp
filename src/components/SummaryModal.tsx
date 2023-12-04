@@ -11,7 +11,8 @@ const BoxStyled = styled(Box)`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 360px;
+  min-width: 340px;
+  max-width: 500px;
   padding: 24px;
   background-color: white;
   border-radius: 10px;
@@ -68,21 +69,25 @@ export const SummaryModal = ({ openModal }: SummaryModalProps) => {
             backgroundColorStyled="#29e652"
             widthStyled={calories}
             macroType="Calories"
+            isGrammage={false}
           />
           <ProgressBar
             backgroundColorStyled="#e69429"
             widthStyled={50}
             macroType="Carbs"
+            isGrammage={false}
           />
           <ProgressBar
             backgroundColorStyled="#dd0aaf"
             widthStyled={30}
             macroType="Fat"
+            isGrammage={false}
           />
           <ProgressBar
             backgroundColorStyled="#3f20f1"
             widthStyled={20}
             macroType="Whey"
+            isGrammage={false}
           />
           <ButtonContainer>
             <Link to="/home">
