@@ -9,6 +9,10 @@ const ContainerStyled = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  @media (max-width: 768px) {
+    grid-column: 1/-1;
+  }
 `;
 
 const BasicInfoBoxStyled = styled.div``;

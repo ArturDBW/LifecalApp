@@ -15,6 +15,11 @@ const Container = styled.div`
   grid-template-columns: 2fr 3fr;
   grid-template-rows: min-content 1fr;
   height: 100%;
+
+  @media (max-width: 768px) {
+    padding: 8px;
+    grid-template-columns: 1fr;
+  }
 `;
 
 interface Product {

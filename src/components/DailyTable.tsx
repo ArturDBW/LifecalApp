@@ -14,6 +14,13 @@ const GridContainerStyled = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
+
+  @media (max-width: 768px) {
+    grid-column: 1/-1;
+    grid-row: 2/3;
+    margin-top: 16px;
+    max-height: auto;
+  }
 `;
 
 interface Product {

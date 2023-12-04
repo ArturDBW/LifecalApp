@@ -40,6 +40,11 @@ const TableRowHistory = styled.div`
   grid-template-rows: 1fr;
   grid-column: 1/-1;
   gap: 0 16px;
+
+  @media (max-width: 480px) {
+    font-size: 12px;
+    gap: 0 8px;
+  }
 `;
 
 const SingleElementStyled = styled.div`

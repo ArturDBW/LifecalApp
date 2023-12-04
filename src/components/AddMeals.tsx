@@ -10,9 +10,19 @@ const ContainerStyled = styled.div`
   display: flex;
   padding: 16px;
   gap: 0 16px;
+
+  @media (max-width: 768px) {
+    grid-column: 1/-1;
+    grid-row: 3/4;
+    flex-direction: column;
+  }
 `;
 
-const InfoBoxStyled = styled.div``;
+const InfoBoxStyled = styled.div`
+  @media (max-width: 768px) {
+    margin-bottom: 16px;
+  }
+`;
 const InfoSpanStyled = styled.span`
   font-size: 40px;
 `;

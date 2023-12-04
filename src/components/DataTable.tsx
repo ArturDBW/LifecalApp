@@ -8,14 +8,12 @@ import TableContainer from "@mui/material/TableContainer";
 import TableFooter from "@mui/material/TableFooter";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
 import IconButton from "@mui/material/IconButton";
 import FirstPageIcon from "@mui/icons-material/FirstPage";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import LastPageIcon from "@mui/icons-material/LastPage";
 import TableHead from "@mui/material/TableHead";
-import foodData from "../data.json";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectUser,
@@ -26,7 +24,7 @@ import {
   addFat,
   addCarbonhydrate,
 } from "../slice/userSlice";
-
+import styled from "styled-components";
 type TablePaginationActionsProps = {
   count: number;
   page: number;
@@ -67,6 +65,14 @@ type CustomPaginationActionTable = {
   tableData: Product[];
   setTableData: React.Dispatch<React.SetStateAction<Product[]>>;
 };
+
+const TableColumnName = styled(TableCell)`
+  width: 50%;
+`;
+
+const TableContainerStyled = styled(Box)``;
+
+const TableStyled = styled.div``;
 
 function TablePaginationActions(props: TablePaginationActionsProps) {
   const theme = useTheme();
@@ -221,12 +227,12 @@ export default function CustomPaginationActionsTable({
   };
 
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
+    <TableContainerStyled component={Box}>
+      <TableStyled aria-label="custom pagination table">
         <TableHead>
           <TableRow>
             <TableCell></TableCell>
-            <TableCell>Dessert (100g serving)</TableCell>
+            <TableCell>Dessert</TableCell>
             <TableCell align="right">Calories</TableCell>
             <TableCell align="right">Fat&nbsp;(g)</TableCell>
             <TableCell align="right">Carbs&nbsp;(g)</TableCell>
@@ -242,14 +248,14 @@ export default function CustomPaginationActionsTable({
             : tableData
           ).map((foodData) => (
             <TableRow key={foodData.id}>
-              <TableCell sx={{ cursor: "pointer" }}>
+              <TableCell sx={{ cursor: "pointer", width: 50 }}>
                 <button onClick={() => handleCombinedFunction(foodData)}>
                   +
                 </button>
               </TableCell>
-              <TableCell component="th" scope="row">
+              <TableColumnName component="th" scope="row">
                 {foodData.name}
-              </TableCell>
+              </TableColumnName>
               <TableCell style={{ width: 160 }} align="right">
                 {foodData.calories}
               </TableCell>
@@ -290,7 +296,7 @@ export default function CustomPaginationActionsTable({
             />
           </TableRow>
         </TableFooter>
-      </Table>
-    </TableContainer>
+      </TableStyled>
+    </TableContainerStyled>
   );
 }

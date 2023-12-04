@@ -8,6 +8,13 @@ const FormContainerStyled = styled.form`
   grid-template-rows: repeat(3, 1fr);
   width: 100%;
   gap: 16px;
+
+  @media (max-width: 768px) {
+    gap: 8px;
+  }
+  @media (max-width: 480px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 `;
 
 const TextFieldNameStyled = styled(TextField)`
@@ -19,7 +26,7 @@ const ButtonStyled = styled(Button)`
 `;
 
 interface Product {
-  name: string;
+  name: string | null;
   id: number;
   calories: number;
   fat: number;
@@ -42,7 +49,7 @@ export const AddMealsForm = ({
   const [carbsValue, setCarbsValue] = useState("");
   const [proteinValue, setProteinValue] = useState("");
 
-  const handleAddProduct = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleAddProduct = (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const newProduct = {
@@ -66,7 +73,7 @@ export const AddMealsForm = ({
   };
 
   return (
-    <FormContainerStyled>
+    <FormContainerStyled onSubmit={handleAddProduct}>
       <TextFieldNameStyled
         value={nameValue}
         onChange={(e) => setNameValue(e.target.value)}
@@ -110,13 +117,7 @@ export const AddMealsForm = ({
         fullWidth
       />
 
-      <ButtonStyled
-        variant="contained"
-        type="submit"
-        fullWidth
-        size="large"
-        onClick={handleAddProduct}
-      >
+      <ButtonStyled variant="contained" type="submit" fullWidth size="large">
         Add product
       </ButtonStyled>
     </FormContainerStyled>
