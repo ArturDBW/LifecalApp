@@ -71,10 +71,17 @@ const TitleBoxStyled = styled.div`
   font-size: 18px;
 `;
 const ButtonStyled = styled.button`
+  background-color: transparent;
   border: none;
   outline: none;
-  background-color: transparent;
   cursor: pointer;
+  border-radius: 50%;
+  transition: 0.2s all;
+  justify-self: end;
+  align-items: center;
+  &:hover {
+    transform: scale(125%);
+  }
 `;
 
 const MacrosBoxStyled = styled.div`
@@ -84,11 +91,6 @@ const MacrosBoxStyled = styled.div`
 const MacrosElementStyled = styled.div`
   flex-grow: 1;
   max-width: 50px;
-`;
-
-const AddButtonStyled = styled.div`
-  justify-self: end;
-  align-items: center;
 `;
 
 const CaloriesElementStyled = styled.div`
@@ -173,9 +175,9 @@ export const DailtyTableRow = ({
           g
         </MacrosElementStyled>
       </MacrosBoxStyled>
-      <AddButtonStyled onClick={onAddButonClick}>
+      <ButtonStyled onClick={onAddButonClick}>
         <AddIcon sx={{ fontSize: 20 }} />
-      </AddButtonStyled>
+      </ButtonStyled>
       {isOpenHistory && (
         <>
           <TableRowHistory>

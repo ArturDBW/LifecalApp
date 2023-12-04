@@ -17,8 +17,7 @@ const ProgressBarInside = styled.div.withConfig({
   shouldForwardProp: (prop) =>
     !["backgroundColorStyled", "widthStyled"].includes(prop),
 })<ProgressBarInsideProps>`
-  background-color: ${({ backgroundColorStyled }) =>
-    `${backgroundColorStyled}`};
+  background: ${({ backgroundColorStyled }) => `${backgroundColorStyled}`};
   width: ${({ widthStyled }) =>
     `${widthStyled > 100 ? (widthStyled = 100) : widthStyled}%`};
   height: 100%;

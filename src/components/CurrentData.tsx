@@ -52,25 +52,25 @@ export const CurrentData = () => {
       </BasicInfoBoxStyled>
       <ProgresBarBoxStyled>
         <ProgressBar
-          backgroundColorStyled="#00d8fe"
+          backgroundColorStyled="linear-gradient(to right, #ff7e5f, #feb47b)"
           widthStyled={15}
           macroType="Calories"
           isGrammage={true}
         />
         <ProgressBar
-          backgroundColorStyled="#08fe00"
+          backgroundColorStyled="linear-gradient(to right, #09f7ed, #30bdba)"
           widthStyled={45}
           macroType="Fat"
           isGrammage={true}
         />
         <ProgressBar
-          backgroundColorStyled="#ee5c19"
+          backgroundColorStyled="linear-gradient(to right, #ac72b1, #4d1749)"
           widthStyled={85}
           macroType="Carbs"
           isGrammage={true}
         />
         <ProgressBar
-          backgroundColorStyled="#d11a94"
+          backgroundColorStyled="linear-gradient(to right, #c747c7, #f911d8)"
           widthStyled={30}
           macroType="Protein"
           isGrammage={true}

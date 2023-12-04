@@ -66,25 +66,25 @@ export const SummaryModal = ({ openModal }: SummaryModalProps) => {
           </ShortDescriptionStyled>
 
           <ProgressBar
-            backgroundColorStyled="#29e652"
+            backgroundColorStyled="linear-gradient(to right, #ff7e5f, #feb47b)"
             widthStyled={calories}
             macroType="Calories"
             isGrammage={false}
           />
           <ProgressBar
-            backgroundColorStyled="#e69429"
+            backgroundColorStyled="linear-gradient(to right, #ac72b1, #4d1749)"
             widthStyled={50}
             macroType="Carbs"
             isGrammage={false}
           />
           <ProgressBar
-            backgroundColorStyled="#dd0aaf"
+            backgroundColorStyled="linear-gradient(to right, #09f7ed, #30bdba)"
             widthStyled={30}
             macroType="Fat"
             isGrammage={false}
           />
           <ProgressBar
-            backgroundColorStyled="#3f20f1"
+            backgroundColorStyled="linear-gradient(to right, #c747c7, #f911d8)"
             widthStyled={20}
             macroType="Protein"
             isGrammage={false}

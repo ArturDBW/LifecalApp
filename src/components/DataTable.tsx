@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
-import Table from "@mui/material/Table";
+import { Paper } from "@mui/material";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
@@ -15,6 +15,8 @@ import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import LastPageIcon from "@mui/icons-material/LastPage";
 import TableHead from "@mui/material/TableHead";
 import { useDispatch, useSelector } from "react-redux";
+import AddIcon from "@mui/icons-material/Add";
+
 import {
   selectUser,
   addItemMeals,
@@ -25,6 +27,7 @@ import {
   addCarbonhydrate,
 } from "../slice/userSlice";
 import styled from "styled-components";
+import { PlusButton } from "../elements/PlusButton";
 type TablePaginationActionsProps = {
   count: number;
   page: number;
@@ -73,6 +76,18 @@ const TableColumnName = styled(TableCell)`
 const TableContainerStyled = styled(Box)``;
 
 const TableStyled = styled.div``;
+
+const ButtonStyled = styled.button`
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: 0.2s all;
+  &:hover {
+    transform: scale(125%);
+  }
+`;
 
 function TablePaginationActions(props: TablePaginationActionsProps) {
   const theme = useTheme();
@@ -227,7 +242,7 @@ export default function CustomPaginationActionsTable({
   };
 
   return (
-    <TableContainerStyled component={Box}>
+    <TableContainerStyled component={Paper}>
       <TableStyled aria-label="custom pagination table">
         <TableHead>
           <TableRow>
@@ -249,9 +264,9 @@ export default function CustomPaginationActionsTable({
           ).map((foodData) => (
             <TableRow key={foodData.id}>
               <TableCell sx={{ cursor: "pointer", width: 50 }}>
-                <button onClick={() => handleCombinedFunction(foodData)}>
-                  +
-                </button>
+                <ButtonStyled onClick={() => handleCombinedFunction(foodData)}>
+                  <AddIcon />
+                </ButtonStyled>
               </TableCell>
               <TableColumnName component="th" scope="row">
                 {foodData.name}
