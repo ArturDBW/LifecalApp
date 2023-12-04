@@ -44,10 +44,40 @@ const ProgresBarBoxStyled = styled.div`
 export const CurrentData = () => {
   const userData = useSelector(selectUser);
 
+  const daysOfWeek = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  const currentDate = new Date();
+  const dayOfWeek = daysOfWeek[currentDate.getDay()];
+  const dayOfMonth = currentDate.getDate();
+  const month = months[currentDate.getMonth()];
+  const formattedDate = `${dayOfWeek}, ${dayOfMonth} ${month}`;
+
   return (
     <ContainerStyled>
       <BasicInfoBoxStyled>
-        <DataStyled>Monday, 24th January</DataStyled>
+        <DataStyled>{formattedDate}</DataStyled>
         <CaloriesStyled>
           <CaloriesInfoStyled>
             {userData[0].currentCalories}
