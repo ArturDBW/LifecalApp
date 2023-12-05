@@ -1,6 +1,26 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
+interface User {
+  // Definiuj typ dla użytkownika
+  currentCalories: number;
+  currentProteins: number;
+  currentFat: number;
+  currentCarbonhydrates: number;
+  // Dodaj inne pola, jeśli istnieją
+}
+
+interface Meals {
+  // Definiuj typ dla posiłków
+  id: number;
+  // Dodaj inne pola, jeśli istnieją
+}
+
+interface UserState {
+  user: User[];
+  meals: Meals[];
+}
+
+const initialState: UserState = {
   user: [],
   meals: [],
 };
@@ -61,5 +81,5 @@ export const {
   deleteCarbonhydrate,
 } = userSlice.actions;
 
-export const selectUser = (state) => state.user.user;
-export const selectUserMeals = (state) => state.user.meals;
+export const selectUser = (state: { user: UserState }) => state.user.user;
+export const selectUserMeals = (state: { user: UserState }) => state.user.meals;
