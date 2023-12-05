@@ -8,6 +8,7 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 1200,
+
   bgcolor: "background.paper",
   borderRadius: 2,
   boxShadow: 24,
@@ -27,7 +28,7 @@ const style = {
 
 interface Product {
   name: string;
-  id: number;
+  id: number | string;
   calories: number;
   fat: number;
   carbs: number;

@@ -1,14 +1,23 @@
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { selectUserMeals } from "../slice/userSlice";
+import {
+  deleteItem,
+  selectUserMeals,
+  deleteCalorie,
+  deleteCarbonhydrate,
+  deleteFat,
+  deleteProtein,
+} from "../slice/userSlice";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import AddIcon from "@mui/icons-material/Add";
 import { useState } from "react";
-
+import DeleteIcon from "@mui/icons-material/Delete";
+import { useDispatch } from "react-redux";
 type MealProps = {
   type: string;
   name: string;
+  id: number;
   mealCalories: number;
   mealFat: number;
   mealCarbonhydrates: number;
@@ -31,28 +40,38 @@ const TableRow = styled.div`
   gap: 16px;
   background-color: #fff;
   border-radius: 10px;
+
+  @media (max-width: 480px) {
+    gap: 16px 4px;
+  }
 `;
 
 const TableRowHistory = styled.div`
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr repeat(4, 50px);
+  grid-template-columns: 1fr repeat(5, 50px);
   grid-template-rows: 1fr;
   grid-column: 1/-1;
   gap: 0 16px;
 
   @media (max-width: 480px) {
     font-size: 12px;
-    gap: 0 8px;
+    gap: 0 10px;
+    grid-template-columns: 1fr repeat(5, 40px);
   }
 `;
 
 const SingleElementStyled = styled.div`
   justify-self: end;
+  display: flex;
+  align-items: center;
 `;
 
 const SingleElementStyledSelf = styled.div`
   justify-self: start;
+  display: flex;
+  align-items: center;
+  position: relative;
 `;
 
 const HeaderSingleElementStyledSelf = styled.div`
@@ -60,6 +79,16 @@ const HeaderSingleElementStyledSelf = styled.div`
   font-weight: 700;
 `;
 
+const MinusButtonStyled = styled.button`
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  transition: 0.2s all;
+  &:hover {
+    transform: scale(125%);
+  }
+`;
 const HeaderSingleElementStyled = styled.div`
   justify-self: end;
   font-weight: 700;
@@ -107,6 +136,21 @@ export const DailtyTableRow = ({
   const onAddButonClick = () => {
     setSelectedRow(rowName);
     setOpen(true);
+  };
+
+  const dispatch = useDispatch();
+  const handleDeleteItem = (
+    itemId: number,
+    calories: number,
+    protein: number,
+    fat: number,
+    carbs: number
+  ) => {
+    dispatch(deleteItem(itemId));
+    dispatch(deleteCalorie(calories));
+    dispatch(deleteProtein(protein));
+    dispatch(deleteFat(fat));
+    dispatch(deleteCarbonhydrate(carbs));
   };
 
   const [isOpenHistory, setIsOpenHistory] = useState(false);
@@ -178,7 +222,7 @@ export const DailtyTableRow = ({
       <ButtonStyled onClick={onAddButonClick}>
         <AddIcon sx={{ fontSize: 20 }} />
       </ButtonStyled>
-      {isOpenHistory && (
+      {isOpenHistory && userMealsFiltredByType.length > 0 && (
         <>
           <TableRowHistory>
             <HeaderSingleElementStyledSelf>Meals</HeaderSingleElementStyledSelf>
@@ -186,10 +230,13 @@ export const DailtyTableRow = ({
             <HeaderSingleElementStyled>Fat</HeaderSingleElementStyled>
             <HeaderSingleElementStyled>Carbs</HeaderSingleElementStyled>
             <HeaderSingleElementStyled>Proteins</HeaderSingleElementStyled>
+            <HeaderSingleElementStyled>Delete</HeaderSingleElementStyled>
           </TableRowHistory>
           {userMealsFiltredByType.map((meal: MealProps, i: number) => (
             <TableRowHistory key={i}>
-              <SingleElementStyledSelf>{meal.name}</SingleElementStyledSelf>
+              <SingleElementStyledSelf>
+                <span>{meal.name}</span>
+              </SingleElementStyledSelf>
               <SingleElementStyled>
                 {meal.mealCalories}&nbsp;kcal
               </SingleElementStyled>
@@ -199,6 +246,21 @@ export const DailtyTableRow = ({
               </SingleElementStyled>
               <SingleElementStyled>
                 {meal.mealProteins}&nbsp;g
+              </SingleElementStyled>
+              <SingleElementStyled>
+                <MinusButtonStyled
+                  onClick={() =>
+                    handleDeleteItem(
+                      meal.id,
+                      meal.mealCalories,
+                      meal.mealProteins,
+                      meal.mealFat,
+                      meal.mealCarbonhydrates
+                    )
+                  }
+                >
+                  <DeleteIcon />
+                </MinusButtonStyled>
               </SingleElementStyled>
             </TableRowHistory>
           ))}

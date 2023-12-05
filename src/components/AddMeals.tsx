@@ -27,7 +27,21 @@ const InfoSpanStyled = styled.span`
   font-size: 40px;
 `;
 
-export const AddMeals = ({ tableData, setTableData }) => {
+interface Product {
+  name: string;
+  id: number | string;
+  calories: number;
+  fat: number;
+  carbs: number;
+  protein: number;
+}
+
+type AddMealsFormProps = {
+  tableData: Product[];
+  setTableData: React.Dispatch<React.SetStateAction<Product[]>>;
+};
+
+export const AddMeals = ({ tableData, setTableData }: AddMealsFormProps) => {
   return (
     <ContainerStyled>
       <InfoBoxStyled>

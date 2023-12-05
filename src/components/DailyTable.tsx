@@ -25,7 +25,7 @@ const GridContainerStyled = styled.div`
 
 interface Product {
   name: string;
-  id: number;
+  id: number | string;
   calories: number;
   fat: number;
   carbs: number;

@@ -1,6 +1,7 @@
 import { Button, TextField } from "@mui/material";
 import styled from "styled-components";
 import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 const FormContainerStyled = styled.form`
   display: grid;
@@ -26,8 +27,8 @@ const ButtonStyled = styled(Button)`
 `;
 
 interface Product {
-  name: string | null;
-  id: number;
+  name: string;
+  id: number | string;
   calories: number;
   fat: number;
   carbs: number;
@@ -54,7 +55,7 @@ export const AddMealsForm = ({
 
     const newProduct = {
       name: nameValue,
-      id: tableData.length + 1,
+      id: uuidv4(),
       calories: parseFloat(caloriesValue),
       fat: parseFloat(fatValue),
       carbs: parseFloat(carbsValue),

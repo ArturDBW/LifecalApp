@@ -27,6 +27,21 @@ const userSlice = createSlice({
     addCarbonhydrate(state, action) {
       state.user[0].currentCarbonhydrates += action.payload;
     },
+    deleteCalorie(state, action) {
+      state.user[0].currentCalories -= action.payload;
+    },
+    deleteProtein(state, action) {
+      state.user[0].currentProteins -= action.payload;
+    },
+    deleteFat(state, action) {
+      state.user[0].currentFat -= action.payload;
+    },
+    deleteCarbonhydrate(state, action) {
+      state.user[0].currentCarbonhydrates -= action.payload;
+    },
+    deleteItem(state, action) {
+      state.meals = state.meals.filter((item) => item.id !== action.payload);
+    },
   },
 });
 
@@ -39,6 +54,11 @@ export const {
   addProtein,
   addFat,
   addCarbonhydrate,
+  deleteItem,
+  deleteCalorie,
+  deleteProtein,
+  deleteFat,
+  deleteCarbonhydrate,
 } = userSlice.actions;
 
 export const selectUser = (state) => state.user.user;

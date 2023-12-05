@@ -4,7 +4,6 @@ import Box from "@mui/material/Box";
 import { Paper } from "@mui/material";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
 import TableFooter from "@mui/material/TableFooter";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
@@ -16,6 +15,7 @@ import LastPageIcon from "@mui/icons-material/LastPage";
 import TableHead from "@mui/material/TableHead";
 import { useDispatch, useSelector } from "react-redux";
 import AddIcon from "@mui/icons-material/Add";
+import { v4 as uuidv4 } from "uuid";
 
 import {
   selectUser,
@@ -39,6 +39,7 @@ type TablePaginationActionsProps = {
 
 type handleAddMealToDailyTableProps = {
   name: string;
+  id: number | string;
   calories: number;
   carbs: number;
   protein: number;
@@ -55,7 +56,7 @@ type handleCalcMacrosProps = {
 
 interface Product {
   name: string;
-  id: number;
+  id: number | string;
   calories: number;
   fat: number;
   carbs: number;
@@ -72,9 +73,9 @@ const TableColumnName = styled(TableCell)`
   width: 50%;
 `;
 
-const TableContainerStyled = styled(Box)``;
+const TableContainerStyled = styled(Paper)``;
 
-const TableStyled = styled.div``;
+const TableStyled = styled.table``;
 
 const ButtonStyled = styled.button`
   background-color: transparent;
@@ -160,6 +161,7 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
 
 type FoodDataProps = {
   name: string;
+  id: number | string;
   calories: number;
   carbs: number;
   protein: number;
@@ -202,6 +204,7 @@ export default function CustomPaginationActionsTable({
   ) => {
     const newMeal = {
       name: foodData.name,
+      id: uuidv4(),
       mealCalories: foodData.calories,
       mealCarbonhydrates: foodData.carbs,
       mealProteins: foodData.protein,
@@ -226,6 +229,7 @@ export default function CustomPaginationActionsTable({
   const handleCombinedFunction = (foodData: FoodDataProps) => {
     addMealToDailyTableAndCalcMacros({
       name: foodData.name,
+      id: uuidv4(),
       calories: foodData.calories,
       carbs: foodData.carbs,
       protein: foodData.protein,
@@ -285,7 +289,7 @@ export default function CustomPaginationActionsTable({
             </TableRow>
           ))}
           {emptyRows > 0 && (
-            <TableRow style={{ height: 53 * emptyRows }}>
+            <TableRow style={{ height: 63 * emptyRows }}>
               <TableCell colSpan={6} />
             </TableRow>
           )}

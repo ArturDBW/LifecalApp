@@ -87,7 +87,7 @@ export const CurrentData = () => {
       </BasicInfoBoxStyled>
       <ProgresBarBoxStyled>
         <ProgressBar
-          backgroundColorStyled="linear-gradient(to right, #ff7e5f, #feb47b)"
+          backgroundColorStyled="linear-gradient(to right,#feb47b ,#ff7e5f)"
           widthStyled={Number(
             (
               (userData[0].currentCalories / userData[0].userCaloriesNeeds) *
@@ -128,7 +128,7 @@ export const CurrentData = () => {
           targetMacro={userData[0].userCarbohydratesNeeds}
         />
         <ProgressBar
-          backgroundColorStyled="linear-gradient(to right, #c747c7, #f911d8)"
+          backgroundColorStyled="linear-gradient(to right, #f911d8, #c747c7)"
           widthStyled={Number(
             (
               (userData[0].currentProteins / userData[0].userProteinNeeds) *

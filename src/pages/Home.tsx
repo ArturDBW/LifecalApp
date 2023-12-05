@@ -2,8 +2,8 @@ import styled from "styled-components";
 import { DailyTable } from "../components/DailyTable";
 import { CurrentData } from "../components/CurrentData";
 import { AddMeals } from "../components/AddMeals";
-import { useState } from "react";
 import foodData from "../data.json";
+import { useState } from "react";
 
 const Container = styled.div`
   max-width: 1280px;
@@ -24,7 +24,7 @@ const Container = styled.div`
 
 interface Product {
   name: string;
-  id: number;
+  id: number | string;
   calories: number;
   fat: number;
   carbs: number;
