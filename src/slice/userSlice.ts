@@ -1,18 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface User {
-  // Definiuj typ dla użytkownika
   currentCalories: number;
   currentProteins: number;
   currentFat: number;
   currentCarbonhydrates: number;
-  // Dodaj inne pola, jeśli istnieją
 }
 
 interface Meals {
-  // Definiuj typ dla posiłków
   id: number;
-  // Dodaj inne pola, jeśli istnieją
 }
 
 interface UserState {
