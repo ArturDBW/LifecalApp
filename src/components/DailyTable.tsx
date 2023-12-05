@@ -10,10 +10,12 @@ const GridContainerStyled = styled.div`
   margin-left: auto;
   margin-right: auto;
   overflow-y: auto;
-  max-height: 544px;
+  height: 544px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  align-items: space-between;
+
+  gap: 18px;
 
   @media (max-width: 768px) {
     grid-column: 1/-1;

@@ -6,7 +6,7 @@ const ContainerStyled = styled.div`
   grid-row: 2/-1;
   grid-column: 1/3;
   border-radius: 10px;
-  margin-top: 16px;
+  margin-top: 18px;
   display: flex;
   padding: 16px;
   gap: 0 16px;

@@ -289,7 +289,7 @@ export default function CustomPaginationActionsTable({
             </TableRow>
           ))}
           {emptyRows > 0 && (
-            <TableRow style={{ height: 63 * emptyRows }}>
+            <TableRow style={{ height: 64.52 * emptyRows }}>
               <TableCell colSpan={6} />
             </TableRow>
           )}
