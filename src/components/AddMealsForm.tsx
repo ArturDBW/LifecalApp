@@ -1,30 +1,11 @@
-import { Button, TextField } from "@mui/material";
-import styled from "styled-components";
+import { TextField } from "@mui/material";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-
-const FormContainerStyled = styled.form`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(3, 1fr);
-  width: 100%;
-  gap: 16px;
-
-  @media (max-width: 768px) {
-    gap: 8px;
-  }
-  @media (max-width: 480px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-`;
-
-const TextFieldNameStyled = styled(TextField)`
-  grid-column: 1/-1;
-`;
-
-const ButtonStyled = styled(Button)`
-  grid-column: 1/-1;
-`;
+import {
+  ButtonStyled,
+  FormContainerStyled,
+  TextFieldNameStyled,
+} from "../styles/AddMealsFormStyles";
 
 interface Product {
   name: string;

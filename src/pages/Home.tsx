@@ -5,6 +5,15 @@ import { AddMeals } from "../components/AddMeals";
 import foodData from "../data.json";
 import { useState } from "react";
 
+interface Product {
+  name: string;
+  id: number | string;
+  calories: number;
+  fat: number;
+  carbs: number;
+  protein: number;
+}
+
 const Container = styled.div`
   max-width: 1280px;
   margin-left: auto;
@@ -21,15 +30,6 @@ const Container = styled.div`
     grid-template-columns: 1fr;
   }
 `;
-
-interface Product {
-  name: string;
-  id: number | string;
-  calories: number;
-  fat: number;
-  carbs: number;
-  protein: number;
-}
 
 export const Home = () => {
   const [tableData, setTableData] = useState<Product[]>(foodData);

@@ -5,10 +5,20 @@ interface User {
   currentProteins: number;
   currentFat: number;
   currentCarbonhydrates: number;
+  userCaloriesNeeds: number;
+  userFatNeeds: number;
+  userCarbohydratesNeeds: number;
+  userProteinNeeds: number;
 }
 
 interface Meals {
+  type: string;
+  name: string;
   id: number;
+  mealCalories: number;
+  mealFat: number;
+  mealCarbonhydrates: number;
+  mealProteins: number;
 }
 
 interface UserState {

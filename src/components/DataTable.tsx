@@ -26,7 +26,13 @@ import {
   addFat,
   addCarbonhydrate,
 } from "../slice/userSlice";
-import styled from "styled-components";
+import {
+  ButtonStyled,
+  TableColumnName,
+  TableContainerStyled,
+  TableStyled,
+} from "../styles/DataTableStyles";
+
 type TablePaginationActionsProps = {
   count: number;
   page: number;
@@ -68,26 +74,6 @@ type CustomPaginationActionTable = {
   tableData: Product[];
   setTableData: React.Dispatch<React.SetStateAction<Product[]>>;
 };
-
-const TableColumnName = styled(TableCell)`
-  width: 50%;
-`;
-
-const TableContainerStyled = styled(Paper)``;
-
-const TableStyled = styled.table``;
-
-const ButtonStyled = styled.button`
-  background-color: transparent;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  border-radius: 50%;
-  transition: 0.2s all;
-  &:hover {
-    transform: scale(125%);
-  }
-`;
 
 function TablePaginationActions(props: TablePaginationActionsProps) {
   const theme = useTheme();

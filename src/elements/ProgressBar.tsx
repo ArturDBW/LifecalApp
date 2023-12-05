@@ -1,5 +1,19 @@
 import styled from "styled-components";
 
+type ProgressBarInsideProps = {
+  backgroundColorStyled: string;
+  widthStyled: number;
+};
+
+type ProgressBarProps = {
+  backgroundColorStyled: string;
+  widthStyled: number;
+  macroType: string;
+  isGrammage: boolean;
+  currentMacro?: number;
+  targetMacro?: number;
+};
+
 const ProgressBarOutside = styled.div`
   width: 100%;
   height: 6px;
@@ -7,11 +21,6 @@ const ProgressBarOutside = styled.div`
   border-radius: 30px;
   margin-top: 4px;
 `;
-
-type ProgressBarInsideProps = {
-  backgroundColorStyled: string;
-  widthStyled: number;
-};
 
 const ProgressBarInside = styled.div.withConfig({
   shouldForwardProp: (prop) =>
@@ -29,17 +38,6 @@ const DataContainer = styled.div`
   justify-content: space-between;
   margin-top: 12px;
 `;
-
-type ProgressBarProps = {
-  backgroundColorStyled: string;
-  widthStyled: number;
-  macroType: string;
-  isGrammage: boolean;
-  currentMacro?: number;
-  targetMacro?: number;
-};
-
-const Test = styled.div``;
 
 const SpanContainer = styled.div`
   display: flex;
@@ -64,7 +62,7 @@ export const ProgressBar = ({
   targetMacro,
 }: ProgressBarProps) => {
   return (
-    <Test>
+    <div>
       <DataContainer>
         <SpanContainer>
           <span>{macroType}</span>
@@ -85,6 +83,6 @@ export const ProgressBar = ({
           widthStyled={widthStyled}
         ></ProgressBarInside>
       </ProgressBarOutside>
-    </Test>
+    </div>
   );
 };

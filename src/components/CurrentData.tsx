@@ -1,45 +1,14 @@
-import styled from "styled-components";
 import { ProgressBar } from "../elements/ProgressBar";
 import { useSelector } from "react-redux";
 import { selectUser } from "../slice/userSlice";
-
-const ContainerStyled = styled.div`
-  background-color: #fff;
-  border-radius: 10px;
-  padding: 16px;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-
-  @media (max-width: 768px) {
-    grid-column: 1/-1;
-  }
-`;
-
-const BasicInfoBoxStyled = styled.div``;
-const DataStyled = styled.div`
-  font-size: 20px;
-`;
-const CaloriesStyled = styled.div`
-  margin-top: 12px;
-`;
-const CaloriesInfoStyled = styled.span`
-  font-size: 58px;
-`;
-const SecondCaloriesInfoStyled = styled.span`
-  margin-top: 16px;
-  font-size: 28px;
-`;
-const ProgresBarBoxStyled = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 40px 0;
-
-  @media (max-width: 768px) {
-    gap: 8px 0;
-  }
-`;
+import {
+  CaloriesInfoStyled,
+  CaloriesStyled,
+  ContainerStyled,
+  DataStyled,
+  ProgresBarBoxStyled,
+  SecondCaloriesInfoStyled,
+} from "../styles/CurrentDataStyles";
 
 export const CurrentData = () => {
   const userData = useSelector(selectUser);
@@ -76,7 +45,7 @@ export const CurrentData = () => {
 
   return (
     <ContainerStyled>
-      <BasicInfoBoxStyled>
+      <div>
         <DataStyled>{formattedDate}</DataStyled>
         <CaloriesStyled>
           <CaloriesInfoStyled>
@@ -84,7 +53,7 @@ export const CurrentData = () => {
             <SecondCaloriesInfoStyled>kcal</SecondCaloriesInfoStyled>
           </CaloriesInfoStyled>
         </CaloriesStyled>
-      </BasicInfoBoxStyled>
+      </div>
       <ProgresBarBoxStyled>
         <ProgressBar
           backgroundColorStyled="linear-gradient(to right,#feb47b ,#ff7e5f)"

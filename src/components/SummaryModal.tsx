@@ -1,46 +1,15 @@
-import { Button, Modal, Box, Typography } from "@mui/material";
+import { Modal } from "@mui/material";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
 import { ProgressBar } from "../elements/ProgressBar";
 import { useSelector } from "react-redux";
 import { selectUser } from "../slice/userSlice";
-
-const BoxStyled = styled(Box)`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  min-width: 340px;
-  max-width: 440px;
-  padding: 24px;
-  background-color: white;
-  border-radius: 10px;
-`;
-
-const HeaderStyled = styled(Typography).attrs({
-  variant: "h4",
-})`
-  text-align: center;
-`;
-
-const ShortDescriptionStyled = styled(Typography).attrs({
-  variant: "h6",
-  mt: 4,
-  mb: 2,
-})`
-  text-align: center;
-  margin-top: 24px;
-`;
-
-const ButtonStyled = styled(Button).attrs({
-  size: "large",
-  variant: "contained",
-  fullWidth: true,
-})``;
-
-const ButtonContainer = styled.div`
-  margin-top: 24px;
-`;
+import {
+  BoxStyled,
+  ButtonContainer,
+  ButtonStyled,
+  HeaderStyled,
+  ShortDescriptionStyled,
+} from "../styles/SummaryModalStyles";
 
 type SummaryModalProps = {
   openModal: boolean;
@@ -52,7 +21,6 @@ export const SummaryModal = ({ openModal }: SummaryModalProps) => {
 
   return (
     <div>
-      {/* <Button onClick={handleOpen}>Open modal</Button> */}
       <Modal
         open={openModal}
         aria-labelledby="modal-modal-title"
