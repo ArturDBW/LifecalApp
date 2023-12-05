@@ -4,6 +4,7 @@ import { addItem } from "../slice/userSlice";
 import { useDispatch } from "react-redux";
 import {
   ContainerStyled,
+  FormStyled,
   HeaderStyled,
   TextFieldStyled,
   TypographyStyled,
@@ -77,13 +78,6 @@ const calculateProtein = (calories: number) => {
 const calculateFat = (calories: number) => {
   return Math.trunc((calories * 0.3) / 9);
 };
-
-const FormStyled = styled.form`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-`;
 
 export const UserBody = ({ changePage, target, gender }: UserBodyProps) => {
   const [form, setForm] = useState<DataFormTypes>({

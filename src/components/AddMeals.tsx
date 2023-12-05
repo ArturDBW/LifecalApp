@@ -1,5 +1,6 @@
 import {
   ContainerStyled,
+  GreenSpanStyled,
   InfoBoxStyled,
   InfoSpanStyled,
 } from "../styles/AddMealsStyles";
@@ -24,7 +25,8 @@ export const AddMeals = ({ tableData, setTableData }: AddMealsFormProps) => {
     <ContainerStyled>
       <InfoBoxStyled>
         <InfoSpanStyled>
-          If your product is not on the list, add it yourself.
+          If your product is not on <GreenSpanStyled>the list</GreenSpanStyled>,
+          add it yourself.
         </InfoSpanStyled>
       </InfoBoxStyled>
       <AddMealsForm tableData={tableData} setTableData={setTableData} />

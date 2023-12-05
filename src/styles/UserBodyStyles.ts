@@ -38,3 +38,10 @@ export const TextFieldStyled = styled(TextField).attrs({
   variant: "outlined",
   fullWidth: true,
 })``;
+
+export const FormStyled = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+`;

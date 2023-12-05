@@ -25,3 +25,7 @@ export const InfoBoxStyled = styled.div`
 export const InfoSpanStyled = styled.span`
   font-size: 40px;
 `;
+
+export const GreenSpanStyled = styled.span`
+  color: #43a047;
+`;
