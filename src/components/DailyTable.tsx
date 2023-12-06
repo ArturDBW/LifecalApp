@@ -26,7 +26,7 @@ export const DailyTable = ({ tableData, setTableData }: DailyTableProps) => {
     <>
       <GridContainerStyled>
         <DailtyTableRow
-          rowName={"Śniadanie"}
+          rowName={"Breakfast"}
           setOpen={setOpen}
           setSelectedRow={setSelectedRow}
         />
@@ -36,17 +36,17 @@ export const DailyTable = ({ tableData, setTableData }: DailyTableProps) => {
           setSelectedRow={setSelectedRow}
         />
         <DailtyTableRow
-          rowName={"Obiad"}
+          rowName={"Dinner"}
           setOpen={setOpen}
           setSelectedRow={setSelectedRow}
         />
         <DailtyTableRow
-          rowName={"Podwieczorek"}
+          rowName={"Snack"}
           setOpen={setOpen}
           setSelectedRow={setSelectedRow}
         />
         <DailtyTableRow
-          rowName={"Kolacja"}
+          rowName={"Supper"}
           setOpen={setOpen}
           setSelectedRow={setSelectedRow}
         />

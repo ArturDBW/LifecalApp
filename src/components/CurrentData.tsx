@@ -65,8 +65,8 @@ export const CurrentData = () => {
           )}
           macroType="Calories"
           isGrammage={true}
-          currentMacro={userData[0].currentCalories}
-          targetMacro={userData[0].userCaloriesNeeds}
+          currentMacro={Math.round(userData[0].currentCalories * 100) / 100}
+          targetMacro={Math.round(userData[0].userCaloriesNeeds * 100) / 100}
         />
         <ProgressBar
           backgroundColorStyled="linear-gradient(to right, #09f7ed, #30bdba)"
@@ -77,8 +77,8 @@ export const CurrentData = () => {
           )}
           macroType="Fat"
           isGrammage={true}
-          currentMacro={userData[0].currentFat}
-          targetMacro={userData[0].userFatNeeds}
+          currentMacro={Math.round(userData[0].currentFat * 100) / 100}
+          targetMacro={Math.round(userData[0].userFatNeeds * 100) / 100}
         />
         <ProgressBar
           backgroundColorStyled="linear-gradient(to right, #ac72b1, #4d1749)"
@@ -94,7 +94,9 @@ export const CurrentData = () => {
           currentMacro={
             Math.round(userData[0].currentCarbonhydrates * 100) / 100
           }
-          targetMacro={userData[0].userCarbohydratesNeeds}
+          targetMacro={
+            Math.round(userData[0].userCarbohydratesNeeds * 100) / 100
+          }
         />
         <ProgressBar
           backgroundColorStyled="linear-gradient(to right, #f911d8, #c747c7)"
@@ -107,7 +109,7 @@ export const CurrentData = () => {
           macroType="Protein"
           isGrammage={true}
           currentMacro={Math.round(userData[0].currentProteins * 100) / 100}
-          targetMacro={userData[0].userProteinNeeds}
+          targetMacro={Math.round(userData[0].userProteinNeeds * 100) / 100}
         />
       </ProgresBarBoxStyled>
     </ContainerStyled>
