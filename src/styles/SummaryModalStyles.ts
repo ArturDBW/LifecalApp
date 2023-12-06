@@ -11,6 +11,7 @@ export const BoxStyled = styled(Box)`
   padding: 24px;
   background-color: white;
   border-radius: 10px;
+  outline: none;
 `;
 
 export const HeaderStyled = styled(Typography).attrs({

@@ -27,7 +27,7 @@ const style = {
 };
 
 interface Product {
-  name: string;
+  name: string | null;
   id: number | string;
   calories: number;
   fat: number;

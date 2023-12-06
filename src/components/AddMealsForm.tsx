@@ -8,7 +8,7 @@ import {
 } from "../styles/AddMealsFormStyles";
 
 interface Product {
-  name: string;
+  name: string | null;
   id: number | string;
   calories: number;
   fat: number;
@@ -21,81 +21,187 @@ type AddMealsFormProps = {
   setTableData: React.Dispatch<React.SetStateAction<Product[]>>;
 };
 
+type DataFormTypes = {
+  nameValue: string | null;
+  caloriesValue: number | null;
+  fatValue: number | null;
+  carbsValue: number | null;
+  proteinValue: number | null;
+  isError: boolean;
+};
+
+type DataFromTypesValidation = Omit<DataFormTypes, "isError">;
+
+const valueIsOkay = ({
+  nameValue,
+  caloriesValue,
+  fatValue,
+  carbsValue,
+  proteinValue,
+}: DataFromTypesValidation) => {
+  const isAnyOfTheValuesNull =
+    nameValue === null ||
+    caloriesValue === null ||
+    fatValue === null ||
+    carbsValue === null ||
+    proteinValue === null;
+  if (isAnyOfTheValuesNull) {
+    return false;
+  }
+  const isAnyOfTheValuesOutOfRange =
+    caloriesValue < 1 || fatValue < 0 || carbsValue < 0 || proteinValue < 0;
+
+  if (isAnyOfTheValuesOutOfRange) {
+    return false;
+  }
+  return true;
+};
+
 export const AddMealsForm = ({
   tableData,
   setTableData,
 }: AddMealsFormProps) => {
-  const [nameValue, setNameValue] = useState("");
-  const [caloriesValue, setCaloriesValue] = useState("");
-  const [fatValue, setFatValue] = useState("");
-  const [carbsValue, setCarbsValue] = useState("");
-  const [proteinValue, setProteinValue] = useState("");
+  const [form, setForm] = useState<DataFormTypes>({
+    nameValue: null,
+    caloriesValue: null,
+    fatValue: null,
+    carbsValue: null,
+    proteinValue: null,
+    isError: false,
+  });
+
+  const {
+    nameValue,
+    caloriesValue,
+    fatValue,
+    carbsValue,
+    proteinValue,
+    isError,
+  } = form;
 
   const handleAddProduct = (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    const formValidation = valueIsOkay({
+      nameValue,
+      caloriesValue,
+      fatValue,
+      carbsValue,
+      proteinValue,
+    });
+
+    if (formValidation === false) {
+      setForm((previousValues) => ({ ...previousValues, isError: true }));
+      return;
+    }
+
     const newProduct = {
       name: nameValue,
       id: uuidv4(),
-      calories: parseFloat(caloriesValue),
-      fat: parseFloat(fatValue),
-      carbs: parseFloat(carbsValue),
-      protein: parseFloat(proteinValue),
+      calories: parseFloat(String(caloriesValue as number)),
+      fat: parseFloat(String(fatValue as number)),
+      carbs: parseFloat(String(carbsValue as number)),
+      protein: parseFloat(String(proteinValue as number)),
     };
 
     const updatedTableData = [...tableData, newProduct];
 
     setTableData(updatedTableData);
+  };
 
-    setNameValue("");
-    setCaloriesValue("");
-    setFatValue("");
-    setCarbsValue("");
-    setProteinValue("");
+  const handleInputChangeNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = parseInt(e.target.value, 10);
+    setForm((previousValue) => ({
+      ...previousValue,
+      [e.target.name]: isNaN(newValue) ? null : newValue,
+      isError: false,
+    }));
+  };
+
+  const handleInputChangeString = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value;
+    setForm((previousValue) => ({
+      ...previousValue,
+      [e.target.name]: newValue === "" ? null : newValue,
+      isError: false,
+    }));
   };
 
   return (
     <FormContainerStyled onSubmit={handleAddProduct}>
       <TextFieldNameStyled
-        value={nameValue}
-        onChange={(e) => setNameValue(e.target.value)}
+        value={nameValue !== null ? nameValue.toString() : ""}
+        name="nameValue"
+        onChange={handleInputChangeString}
         id="outlined-basic"
         label="Meal"
         variant="outlined"
         fullWidth
+        error={isError && nameValue === null}
+        helperText={isError && nameValue === null ? "Invalid name." : ""}
       />
       <TextField
-        value={caloriesValue}
-        onChange={(e) => setCaloriesValue(e.target.value)}
+        value={caloriesValue !== null ? caloriesValue.toString() : ""}
+        name="caloriesValue"
+        onChange={handleInputChangeNumber}
+        type="number"
         id="outlined-basic"
         label="Calories"
         variant="outlined"
+        error={isError && (caloriesValue === null || caloriesValue < 1)}
+        helperText={
+          isError && (caloriesValue === null || caloriesValue < 1)
+            ? "Invalid value."
+            : ""
+        }
         fullWidth
       />
 
       <TextField
-        value={fatValue}
-        onChange={(e) => setFatValue(e.target.value)}
+        value={fatValue !== null ? fatValue.toString() : ""}
+        onChange={handleInputChangeNumber}
+        name="fatValue"
+        type="number"
         id="outlined-basic"
         label="Fat (g)"
         variant="outlined"
+        error={isError && (fatValue === null || fatValue < 0)}
+        helperText={
+          isError && (fatValue === null || fatValue < 0) ? "Invalid value." : ""
+        }
         fullWidth
       />
       <TextField
-        value={carbsValue}
-        onChange={(e) => setCarbsValue(e.target.value)}
+        value={carbsValue !== null ? carbsValue.toString() : ""}
+        onChange={handleInputChangeNumber}
+        name="carbsValue"
+        type="number"
         id="outlined-basic"
         label="Carbs (g)"
         variant="outlined"
+        error={isError && (carbsValue === null || carbsValue < 0)}
+        helperText={
+          isError && (carbsValue === null || carbsValue < 0)
+            ? "Invalid value."
+            : ""
+        }
         fullWidth
       />
 
       <TextField
-        value={proteinValue}
-        onChange={(e) => setProteinValue(e.target.value)}
+        value={proteinValue !== null ? proteinValue.toString() : ""}
+        name="proteinValue"
+        onChange={handleInputChangeNumber}
+        type="number"
         id="outlined-basic"
         label="Protein (g)"
         variant="outlined"
+        error={isError && (proteinValue === null || proteinValue < 0)}
+        helperText={
+          isError && (proteinValue === null || proteinValue < 0)
+            ? "Invalid value."
+            : ""
+        }
         fullWidth
       />
 

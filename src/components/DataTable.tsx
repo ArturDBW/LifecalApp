@@ -61,7 +61,7 @@ type handleCalcMacrosProps = {
 };
 
 interface Product {
-  name: string;
+  name: string | null;
   id: number | string;
   calories: number;
   fat: number;
@@ -146,7 +146,7 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
 }
 
 type FoodDataProps = {
-  name: string;
+  name: string | null;
   id: number | string;
   calories: number;
   carbs: number;
@@ -214,7 +214,7 @@ export default function CustomPaginationActionsTable({
 
   const handleCombinedFunction = (foodData: FoodDataProps) => {
     addMealToDailyTableAndCalcMacros({
-      name: foodData.name,
+      name: foodData.name as string,
       id: uuidv4(),
       calories: foodData.calories,
       carbs: foodData.carbs,

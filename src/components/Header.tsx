@@ -8,7 +8,7 @@ export default function Header() {
       <AppBar position="static">
         <Toolbar variant="dense">
           <Typography variant="h5" color="inherit" component="div" py={3}>
-            CalcCalories
+            Lifecal
           </Typography>
         </Toolbar>
       </AppBar>

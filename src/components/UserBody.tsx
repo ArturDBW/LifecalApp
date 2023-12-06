@@ -10,7 +10,6 @@ import {
   TypographyStyled,
 } from "../styles/UserBodyStyles";
 import { SummaryModal } from "./SummaryModal";
-import styled from "styled-components";
 
 type UserBodyProps = {
   changePage: number;
