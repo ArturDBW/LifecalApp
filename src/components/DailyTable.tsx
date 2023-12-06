@@ -20,7 +20,6 @@ type DailyTableProps = {
 export const DailyTable = ({ tableData, setTableData }: DailyTableProps) => {
   const [open, setOpen] = React.useState(false);
   const [selectedRow, setSelectedRow] = useState("");
-  console.log(selectedRow);
 
   return (
     <>

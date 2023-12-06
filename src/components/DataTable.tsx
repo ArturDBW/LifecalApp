@@ -13,14 +13,12 @@ import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import LastPageIcon from "@mui/icons-material/LastPage";
 import TableHead from "@mui/material/TableHead";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import AddIcon from "@mui/icons-material/Add";
 import { v4 as uuidv4 } from "uuid";
 
 import {
-  selectUser,
   addItemMeals,
-  selectUserMeals,
   addCalorie,
   addProtein,
   addFat,
@@ -180,10 +178,6 @@ export default function CustomPaginationActionsTable({
   };
 
   const dispatch = useDispatch();
-  const users = useSelector(selectUser);
-  const userMeals = useSelector(selectUserMeals);
-  console.log(userMeals);
-  console.log(users);
 
   const addMealToDailyTableAndCalcMacros = (
     foodData: handleAddMealToDailyTableProps
