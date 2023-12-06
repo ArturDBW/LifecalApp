@@ -4,6 +4,7 @@ import { CurrentData } from "../components/CurrentData";
 import { AddMeals } from "../components/AddMeals";
 import foodData from "../data.json";
 import { useState } from "react";
+import Header from "../components/Header";
 
 interface Product {
   name: string | null;
@@ -35,11 +36,14 @@ export const Home = () => {
   const [tableData, setTableData] = useState<Product[]>(foodData);
 
   return (
-    <Container>
-      <CurrentData />
-      <DailyTable tableData={tableData} setTableData={setTableData} />
-      <AddMeals tableData={tableData} setTableData={setTableData} />
-    </Container>
+    <>
+      <Header />
+      <Container>
+        <CurrentData />
+        <DailyTable tableData={tableData} setTableData={setTableData} />
+        <AddMeals tableData={tableData} setTableData={setTableData} />
+      </Container>
+    </>
   );
   1;
 };

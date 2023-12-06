@@ -6,7 +6,6 @@ import { useState } from "react";
 import styled from "styled-components";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Box } from "@mui/material";
-
 import { PaperStyled } from "../styles/GetBasicInformationStyles";
 import backgroundImage from "../assets/health.avif";
 
