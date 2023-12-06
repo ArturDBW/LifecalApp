@@ -14,20 +14,20 @@ export const ContainerBox = styled(Box)`
   left: 0;
 `;
 
-export const ImageContainer = styled(Box)`
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-image: url(${backgroundImage});
-  background-size: cover;
-  background-position: center;
-  position: absolute;
-  top: 0;
-  padding: 10px;
-  z-index: 10;
-`;
+// export const ImageContainer = styled(Box)`
+//   width: 100vw;
+//   height: 100vh;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   background-image: url(${backgroundImage});
+//   background-size: cover;
+//   background-position: center;
+//   position: absolute;
+//   top: 0;
+//   padding: 10px;
+//   z-index: 10;
+// `;
 
 export const PaperStyled = styled(Paper)`
   min-height: 60vh;

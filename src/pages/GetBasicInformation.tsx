@@ -5,14 +5,29 @@ import { UserBody } from "../components/UserBody";
 import { useState } from "react";
 import styled from "styled-components";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import {
-  ImageContainer,
-  PaperStyled,
-} from "../styles/GetBasicInformationStyles";
+import { Box } from "@mui/material";
+
+import { PaperStyled } from "../styles/GetBasicInformationStyles";
+import backgroundImage from "../assets/health.avif";
 
 type ReturnArrowProps = {
   changePage: number;
 };
+
+const ImageContainer = styled(Box)`
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url(${backgroundImage});
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+  top: 0;
+  padding: 10px;
+  z-index: 10;
+`;
 
 export const ReturnArrow = styled(ArrowBackIcon).withConfig({
   shouldForwardProp: (prop) => !["changePage"].includes(prop),
