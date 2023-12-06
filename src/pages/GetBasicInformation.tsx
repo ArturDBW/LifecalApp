@@ -1,4 +1,3 @@
-// import { Box, Paper } from "@mui/material";
 import { StarterInfo } from "../components/StarterInfo";
 import { UserTarget } from "../components/UserTarget";
 import { UserGender } from "../components/UserGender";
