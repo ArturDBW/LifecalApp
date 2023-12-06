@@ -5,7 +5,7 @@ import { Outlet } from "react-router-dom";
 
 const ContainerStyled = styled.div`
   width: 100vw;
-  height: 100svh;
+  height: 100vh;
   background-color: #eee;
 
   @media (max-width: 768px) {
