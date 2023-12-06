@@ -143,6 +143,13 @@ export const AddMealsForm = ({
         fullWidth
         error={isError && nameValue === null}
         helperText={isError && nameValue === null ? "Invalid name." : ""}
+        sx={{
+          "& .MuiFormHelperText-root": {
+            position: "absolute",
+            top: 0,
+            left: 0,
+          },
+        }}
       />
       <TextField
         value={caloriesValue !== null ? caloriesValue.toString() : ""}
@@ -158,6 +165,13 @@ export const AddMealsForm = ({
             ? "Invalid value."
             : ""
         }
+        sx={{
+          "& .MuiFormHelperText-root": {
+            position: "absolute",
+            top: 0,
+            left: 0,
+          },
+        }}
         fullWidth
       />
 
@@ -173,6 +187,13 @@ export const AddMealsForm = ({
         helperText={
           isError && (fatValue === null || fatValue < 0) ? "Invalid value." : ""
         }
+        sx={{
+          "& .MuiFormHelperText-root": {
+            position: "absolute",
+            top: 0,
+            left: 0,
+          },
+        }}
         fullWidth
       />
       <TextField
@@ -189,6 +210,13 @@ export const AddMealsForm = ({
             ? "Invalid value."
             : ""
         }
+        sx={{
+          "& .MuiFormHelperText-root": {
+            position: "absolute",
+            top: 0,
+            left: 0,
+          },
+        }}
         fullWidth
       />
 
@@ -207,6 +235,13 @@ export const AddMealsForm = ({
             : ""
         }
         fullWidth
+        sx={{
+          "& .MuiFormHelperText-root": {
+            position: "absolute",
+            top: 0,
+            left: 0,
+          },
+        }}
       />
 
       <ButtonStyled variant="contained" type="submit" fullWidth size="large">
