@@ -26,6 +26,7 @@ export const ImageContainer = styled(Box)`
   position: absolute;
   top: 0;
   padding: 10px;
+  z-index: 10;
 `;
 
 export const PaperStyled = styled(Paper)`
