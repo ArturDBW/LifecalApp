@@ -61,14 +61,16 @@ export const AddMealsForm = ({
   tableData,
   setTableData,
 }: AddMealsFormProps) => {
-  const [form, setForm] = useState<DataFormTypes>({
+  const initialState: DataFormTypes = {
     nameValue: null,
     caloriesValue: null,
     fatValue: null,
     carbsValue: null,
     proteinValue: null,
     isError: false,
-  });
+  };
+
+  const [form, setForm] = useState<DataFormTypes>(initialState);
 
   const {
     nameValue,
@@ -107,6 +109,8 @@ export const AddMealsForm = ({
     const updatedTableData = [...tableData, newProduct];
 
     setTableData(updatedTableData);
+
+    setForm(initialState);
   };
 
   const handleInputChangeNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
