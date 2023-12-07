@@ -17,13 +17,7 @@ import { useDispatch } from "react-redux";
 import AddIcon from "@mui/icons-material/Add";
 import { v4 as uuidv4 } from "uuid";
 
-import {
-  addItemMeals,
-  addCalorie,
-  addProtein,
-  addFat,
-  addCarbonhydrate,
-} from "../slice/userSlice";
+import { addItemMeals, addMacro } from "../slice/userSlice";
 import {
   ButtonStyled,
   TableColumnName,
@@ -159,7 +153,6 @@ export default function CustomPaginationActionsTable({
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
-  // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - tableData.length) : 0;
 
@@ -200,10 +193,7 @@ export default function CustomPaginationActionsTable({
     carbs,
     fat,
   }: handleCalcMacrosProps) => {
-    dispatch(addCalorie(calories));
-    dispatch(addProtein(proteins));
-    dispatch(addFat(fat));
-    dispatch(addCarbonhydrate(carbs));
+    dispatch(addMacro({ calories, proteins, carbs, fat }));
   };
 
   const handleCombinedFunction = (foodData: FoodDataProps) => {

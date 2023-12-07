@@ -38,54 +38,33 @@ const userSlice = createSlice({
     addItem(state, action) {
       state.user.push(action.payload);
     },
+    deleteItem(state, action) {
+      state.meals = state.meals.filter((item) => item.id !== action.payload);
+    },
     addItemMeals(state, action) {
       state.meals.push(action.payload);
     },
-    addCalorie(state, action) {
-      state.user[0].currentCalories += action.payload;
+    addMacro(state, action) {
+      const { calories, proteins, fat, carbs } = action.payload;
+      state.user[0].currentCalories += calories;
+      state.user[0].currentProteins += proteins;
+      state.user[0].currentFat += fat;
+      state.user[0].currentCarbonhydrates += carbs;
     },
-    addProtein(state, action) {
-      state.user[0].currentProteins += action.payload;
-    },
-    addFat(state, action) {
-      state.user[0].currentFat += action.payload;
-    },
-    addCarbonhydrate(state, action) {
-      state.user[0].currentCarbonhydrates += action.payload;
-    },
-    deleteCalorie(state, action) {
-      state.user[0].currentCalories -= action.payload;
-    },
-    deleteProtein(state, action) {
-      state.user[0].currentProteins -= action.payload;
-    },
-    deleteFat(state, action) {
-      state.user[0].currentFat -= action.payload;
-    },
-    deleteCarbonhydrate(state, action) {
-      state.user[0].currentCarbonhydrates -= action.payload;
-    },
-    deleteItem(state, action) {
-      state.meals = state.meals.filter((item) => item.id !== action.payload);
+    deleteMacro(state, action) {
+      const { calories, proteins, fat, carbs } = action.payload;
+      state.user[0].currentCalories -= calories;
+      state.user[0].currentProteins -= proteins;
+      state.user[0].currentFat -= fat;
+      state.user[0].currentCarbonhydrates -= carbs;
     },
   },
 });
 
 export default userSlice.reducer;
 
-export const {
-  addItem,
-  addItemMeals,
-  addCalorie,
-  addProtein,
-  addFat,
-  addCarbonhydrate,
-  deleteItem,
-  deleteCalorie,
-  deleteProtein,
-  deleteFat,
-  deleteCarbonhydrate,
-} = userSlice.actions;
+export const { addItem, addItemMeals, deleteItem, addMacro, deleteMacro } =
+  userSlice.actions;
 
 export const selectUser = (state: { user: UserState }) => state.user.user;
 export const selectUserMeals = (state: { user: UserState }) => state.user.meals;

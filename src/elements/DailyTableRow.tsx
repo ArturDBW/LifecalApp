@@ -19,14 +19,7 @@ import {
   TableRowHistory,
   TitleBoxStyled,
 } from "../styles/DailyTableRowStyles";
-import {
-  deleteItem,
-  selectUserMeals,
-  deleteCalorie,
-  deleteCarbonhydrate,
-  deleteFat,
-  deleteProtein,
-} from "../slice/userSlice";
+import { deleteItem, selectUserMeals, deleteMacro } from "../slice/userSlice";
 
 type MealProps = {
   type: string;
@@ -58,15 +51,12 @@ export const DailtyTableRow = ({
   const handleDeleteItem = (
     itemId: number,
     calories: number,
-    protein: number,
+    proteins: number,
     fat: number,
     carbs: number
   ) => {
     dispatch(deleteItem(itemId));
-    dispatch(deleteCalorie(calories));
-    dispatch(deleteProtein(protein));
-    dispatch(deleteFat(fat));
-    dispatch(deleteCarbonhydrate(carbs));
+    dispatch(deleteMacro({ calories, proteins, carbs, fat }));
   };
 
   const [isOpenHistory, setIsOpenHistory] = useState(false);
