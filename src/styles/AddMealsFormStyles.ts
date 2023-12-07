@@ -23,3 +23,30 @@ export const TextFieldNameStyled = styled(TextField)`
 export const ButtonStyled = styled(Button)`
   grid-column: 1/-1;
 `;
+
+type SuccesInformationStyledProps = {
+  successInfoVisible: boolean;
+};
+
+export const SuccessInformationStyled = styled.div.withConfig({
+  shouldForwardProp: (prop) => !["successInfoVisible"].includes(prop),
+})<SuccesInformationStyledProps>`
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: ${(props) => (props.successInfoVisible ? "20%" : "-20%")};
+  transform: translate(-50%, -50%);
+  padding: 24px;
+  background-color: #43a047;
+  font-size: 16px;
+  color: #fff;
+  left: 50%;
+  border-radius: 10px;
+  min-width: 280px;
+  transition: top 0.3s ease-in-out;
+`;
+
+export const SuccessInformationSpanStyled = styled.span`
+  margin-left: 16px;
+`;

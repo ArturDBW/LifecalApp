@@ -1,9 +1,12 @@
 import { TextField } from "@mui/material";
 import { useState } from "react";
+import CheckIcon from "@mui/icons-material/Check";
 import { v4 as uuidv4 } from "uuid";
 import {
   ButtonStyled,
   FormContainerStyled,
+  SuccessInformationSpanStyled,
+  SuccessInformationStyled,
   TextFieldNameStyled,
 } from "../styles/AddMealsFormStyles";
 
@@ -61,6 +64,15 @@ export const AddMealsForm = ({
   tableData,
   setTableData,
 }: AddMealsFormProps) => {
+  const [successInfoVisible, setSuccesInfoVisible] = useState(false);
+
+  const messageAfterAddMeal = () => {
+    setSuccesInfoVisible(true);
+    setTimeout(() => {
+      setSuccesInfoVisible(false);
+    }, 3000);
+  };
+
   const initialState: DataFormTypes = {
     nameValue: null,
     caloriesValue: null,
@@ -111,6 +123,7 @@ export const AddMealsForm = ({
     setTableData(updatedTableData);
 
     setForm(initialState);
+    messageAfterAddMeal();
   };
 
   const handleInputChangeNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -247,6 +260,12 @@ export const AddMealsForm = ({
       <ButtonStyled variant="contained" type="submit" fullWidth size="large">
         Add product
       </ButtonStyled>
+      <SuccessInformationStyled successInfoVisible={successInfoVisible}>
+        <CheckIcon />
+        <SuccessInformationSpanStyled>
+          Meal added successfully!
+        </SuccessInformationSpanStyled>
+      </SuccessInformationStyled>
     </FormContainerStyled>
   );
 };
