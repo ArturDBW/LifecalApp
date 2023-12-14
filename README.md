@@ -1,8 +1,9 @@
-## LifecalApp
+# LifecalApp
 
-# Aplikacja webowa umożliwiająca kontrolowanie spożytych kalorii i makroskładników.
+## Description
+Web application allows to control calories and macronutrients.
 
-# Technologie wykorzystane przy tworzeniu: 
+## Technologies
 - React
 - TypeScript
 - Vite
@@ -11,15 +12,15 @@
 - Redux
 - React Router
 
-# Jak odpalić apke
+## How to run app
 - npm install
 - npm run dev
 
-# Projekt LifecalApp rozwinął moje umiejtnośći wykorzystania TypeScript, dodatkowo utrwalił umiejętności wykorzystania Redux. Po raz pierwszy w projekcie zdecydowałem się na użycie Styled Components oraz MUI, dzięki czemu praca z tymi technologami nie już dla mmie obca. 
+## What I learned
+Project LifecalApp improved my TypeScript and Redux skills. For the first time I used Styled Components and MUI in project, making working with these technologies no longer unfamiliar to me. 
 
-# Funkcje aplikacji:
-- Zebranie danych użytkownika i na ich podstawie wyliczenie dziennego zapotrzebowania kalorycznego
-- Dodawanie posiłków z listy z podziałem na rodzaj posiłku w ciągu dnia
-- Atualizacja obecnie spożytych kalorii i makroskładników z każdym dodaniem/usunieciem posiłku
-- Możliwość dodania swojego własnego posiłku
-
+## Features
+- Getting information about user and calclulate daily calories requirement
+- Adding meals from the list
+- Calories and macronutrients states updates when user add/remove meals
+- Adding your own meal to the list 
