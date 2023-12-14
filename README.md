@@ -1,6 +1,7 @@
 # LifecalApp
 
 ## Description
+
 Web application allows to control calories and macronutrients.
 
 ## Technologies
@@ -17,6 +18,7 @@ Web application allows to control calories and macronutrients.
 - npm run dev
 
 ## What I learned
+
 Project LifecalApp improved my TypeScript and Redux skills. For the first time I used Styled Components and MUI in project, making working with these technologies no longer unfamiliar to me. 
 
 ## Features
