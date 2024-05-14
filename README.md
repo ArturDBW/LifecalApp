@@ -2,7 +2,7 @@
 
 ## Description
 
-Web application allows to control calories and macronutrients.
+Web application allows to control calories and macronutrients
 
 ## Technologies
 - React
